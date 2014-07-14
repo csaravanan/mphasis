@@ -1,0 +1,11 @@
+<% if @privileges_create %>
+new Messi("<%=  MESSAGES["previlages"]["create"]["success"] %>", {title: 'Success', titleClass: 'success', autoclose: 1500});
+<%else%>
+new Messi("<%=  MESSAGES["previlages"]["create"]["failure"] %>", {title: 'Warning', titleClass: 'warning', autoclose: 1500});
+<%end%>
+<% @created_priviliges.each do |privilege| %>
+ dataSource.insert(0,{id: <%= privilege.id%>, role_name: "<%= privilege.role_title%>", model_name: "<%= privilege.modular_model_name%>", action_name: "<%= privilege.modular_action_name%>"});	
+<%end%>
+$('#privilege_modular').val('');
+$('#privilege_modular_id').val('');
+$('.multiselect').multiselect().trigger('reset');

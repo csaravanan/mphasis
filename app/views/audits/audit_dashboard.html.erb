@@ -1,0 +1,174 @@
+<script>
+	var domains = <%= raw @audit_domains %>;
+	var percentages = <%= raw @audit_percentage%>;
+	var weightages = <%= raw @audit_weightage%>;
+	var maximum_scores = <%= raw @audit_maximum_score%>;
+	var completed_status = <%= raw @checklist_completed_count %>;
+	var pending_status = <%= raw @checklist_pending_count %>;
+	var recommendation_completed_count = <%= raw @recommendation_completed_count %>;
+	var recommendation_pending_count = <%= raw @recommendation_pending_count %>;
+	var observation_completed_count = <%= raw @observation_completed_count %>;
+	var observation_pending_count = <%= raw @observation_pending_count %>;
+	var response_completed_count = <%= raw @response_completed_count %>;
+	var response_pending_count = <%= raw @response_pending_count %>;
+
+</script>
+<%= javascript_include_tag "/assets/views/audit_dashboard.js" %>
+<script src="/assets/outer/highcharts.js"></script>
+<script src="/assets/outer/exporting.js"></script>
+<script src="/assets/outer/drilldown.js"></script>
+<script src="/assets/outer/data.js"></script>
+ <div class="clearfix"></div>
+  <!-- Dash Board Start -->
+  <div class="dashboard_main">
+    <div class="container">
+      <div class="row">
+        <!-- Dash Board Title Start -->
+        <div class="dashboard-title col-lg-12">Dashboard</div>
+        <!-- Dash Board Title End -->
+        <div class="col-lg-8 dash_bg">
+
+          <!-- Dash Board Menu Start-->
+          <div class="dashboard_menu">
+            <ul>
+						<% audit_status_id = @audit.audit_status_id unless @audit.nil?%>
+              <li>
+                <div id="arrow" class="<%=  dashboard_audit_status(audit_status_id,'Planning') unless audit_status_id.nil? %>"> <a  href="/audits/<%= @audit.id%>/edit">
+                  <div class="db-plan-icon"></div>
+                  Plan </a> </div>
+              </li>
+              <li>
+                <div id="arrow1" class="<%= dashboard_audit_status(audit_status_id, 'In Progress') unless audit_status_id.nil?%>"> <a  href="<%= (@audit && @audit.compliance_type == "Compliance") ? "/audits/#{@audit.id}-#{@audit.title}/audit_compliances" : "/audits/#{@audit.id}-#{@audit.title}/nc_questions/new"  %>">
+                  <div class="db-do-icon"></div>
+                  Do </a> </div>
+              </li>
+              <li>
+                <div id="arrow2" class="<%= dashboard_audit_status(audit_status_id, 'In Progress') unless audit_status_id.nil?%>"> <a  href="/audits/<%= @audit.id%>-<%= @audit.title%>/checklist_recommendations/new">
+                  <div class="db-check-icon"></div>
+                  Check </a> </div>
+              </li>
+              <li>
+                <div id="arrow3" class="<%= dashboard_audit_status(audit_status_id, 'In Progress') unless audit_status_id.nil?%>"> <a  href= "/audits/<%= @audit.id%>-<%= @audit.title%>/checklist_recommendations/auditee_response">
+                  <div class="db-act-icon"></div>
+                  Act </a> </div>
+              </li>
+              <li>
+                <div id="arrow4" class="<%= dashboard_audit_status(audit_status_id, 'Published') unless audit_status_id.nil?%>"> <a  href= "/audits/<%= @audit.id%>-<%= @audit.title%>/checklist_recommendations/audit_observation">
+                  <div class="db-publish-icon"></div>
+                  Publish </a> </div>
+              </li>
+            </ul>
+          </div>
+          <!-- Dash Board Menu End-->
+          <% if @audit && @audit.audit_status_name == 'Published'%>
+          <!-- Audit Compliance Rating Start -->
+          <div class="dash_sub_title">Audit Compliance Rating</div>
+          <div id="auditcompliancerating"></div>
+          <!-- Audit Compliance Rating End -->
+
+          <!-- ISMS Audit Score Start -->
+          <div class="dash_sub_title">ISMS Audit Score</div>
+          <div id="ISMSAuditScore"></div>
+
+          <!-- ISMS Audit Score End -->
+					<% end %>
+        </div>
+        <div class="col-lg-4 dash_bg">
+          <div class="db_audit_com clearfix">
+            <div class="db_audit_com_icon fleft"></div>
+            <div class="db_audit_com_txt">Audit Compliance Rating <b><% unless @audit.nil?%><%= @audit.percentage.to_f.round(2)%>%<% end %></b> </div>
+          </div>
+
+          <!--Audit Details Start -->
+          <div class="dash_sub_title">Audit Details</div>
+          <div class="db_aduitdetails">
+            <div class="form-group clearfix">
+              <label  class="col-sm-4"><b>Audit Name:</b> </label>
+              <div class="col-sm-8"><%= @audit.title unless @audit.nil?%></div>
+            </div>
+            <div class="form-group clearfix">
+              <label  class="col-sm-4"><b>Start Date:</b> </label>
+              <div class="col-sm-8"><%= @audit.start_date unless @audit.nil?%></div>
+            </div>
+            <div class="form-group clearfix">
+              <label  class="col-sm-4"><b>End Date:</b> </label>
+              <div class="col-sm-8"><%= @audit.end_date unless @audit.nil?%></div>
+            </div>
+            <div class="form-group clearfix">
+              <label  class="col-sm-4"><b>Stakeholder:</b> </label>
+              <div class="col-sm-8"><%= @audit_users.join(',') unless @audit_users.nil?%></div>
+            </div>
+						<% unless @audit.nil? %>
+            <div class="db_download_btn clearfix"> <a class="download-icon" href="/audits/<%= @audit.id unless @audit.nil?%>.pdf">Download Report</a> <a class="download-aff-icon" href="<%= artifacts_download_audits_path(@audit)%>">Download Artifacts</a> </div>
+						<% end %>
+          </div>
+          <!--Audit Details End -->
+          <!--To do List Start -->
+          <div class="dash_sub_title">To Do List</div>
+          <div class="db_todolist">
+					<% @to_do_list && @to_do_list.each do |checklist_recommendation|%>
+					<% if checklist_recommendation.recommendation? && !checklist_recommendation.recommendation_completed? %>
+            <div class="db_todolist_info clearfix">
+              <div class="checkbox_wrapper"></div>
+              <div class="db_inform">
+                <div class="db_todolist_insec"><%= checklist_recommendation.checklist.compliance_library_name%> - Recommendation</div>
+							</div>
+              <a class="pendinglink" href="javascript:void(0)"><%= 'Pending'%></a>
+							</div>
+          <% end %>
+					<% if checklist_recommendation.corrective? && !checklist_recommendation.response_completed?%>
+            <div class="db_todolist_info clearfix">
+              <div class="checkbox_wrapper"></div>
+              <div class="db_inform">
+                <div class="db_todolist_insec"><%= checklist_recommendation.checklist.compliance_library_name%> - Response</div>
+                <span class="time-icon"><%= checklist_recommendation.closure_date%></span> </div>
+              <a class="pendinglink" href="javascript:void(0)"><%= 'Pending' %></a>
+							</div>
+          <% end %>
+					<% if checklist_recommendation.observation? && !checklist_recommendation.is_published?%>
+            <div class="db_todolist_info clearfix">
+              <div class="checkbox_wrapper"></div>
+              <div class="db_inform">
+                <div class="db_todolist_insec"><%= checklist_recommendation.checklist.compliance_library_name%> - Observation</div>
+								</div>
+              <a class="pendinglink" href="javascript:void(0)"><%= 'Pending' %></a>
+							</div>
+          <% end %>
+          <% end %>
+					<% @artifacts_answers && @artifacts_answers.each do |artifact_answer|%>
+					<% if !artifact_answer.comment.present? && artifact_answer.attachments.empty? %>
+            <div class="db_todolist_info clearfix">
+              <div class="checkbox_wrapper"></div>
+              <div class="db_inform">
+                <div class="db_todolist_insec"><%= artifact_answer.audit_compliance.compliance_library_name%> - Artifacts</div>
+							</div>
+              <a class="pendinglink" href="javascript:void(0)"><%= 'Pending'%></a>
+							</div>
+          <% end %>
+          <% end %>
+						</div>
+          <!--To do List Start -->
+
+          <!--Audit Status  Start-->
+					<% if @audit && @audit.audit_status_name == 'Published'%>
+						<div class="dash_sub_title">Audit Status</div>
+						<div id="container" class="aduit_status"></div>
+          <% end %>
+          <!-- Data from www.netmarketshare.com. Select Browsers => Desktop share by version. Download as tsv. -->
+          <pre id="tsv" style="display:none">
+Completed 8.0	0.55%
+Completed 8.0	0.55%
+Inprogress 5.0	0.85%
+Rejected 9.0	0.65%
+Pending 8.0	0.55%
+</pre>
+
+          <!--Audit Status  End-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Dash Board End -->
+
+
+

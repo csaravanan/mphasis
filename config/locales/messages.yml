@@ -1,0 +1,264 @@
+en:
+
+  location:
+    create:
+      success: "Location was created successfully"
+      update: "Location was successfully updated"
+      destroy: "Location was successfully destroyed"
+
+
+  client:
+    create:
+      success: "client was created successfully."
+      update: "client was successfully updated."
+      destroy: "client was successfully destroyed."
+
+  Team:
+    create:
+      success: "Team was created successfully."
+      update: "Team was successfully updated."
+      destroy: "Team was successfully destroyed."
+
+  Department:
+    create:
+      success: "Department was created successfully."
+      update: "Department was successfully updated."
+      destroy: "Department was successfully destroyed."
+
+  User:
+    create:
+      success: "User was created successfully."
+      update: "User was successfully updated."
+      destroy: "User was successfully destroyed."
+
+  Role:
+    create:
+      success: "Role was created successfully"
+
+  checklist_recommendation:
+    auditee_create:
+      success: "Auditee response was created successfully"
+    audit_observation:
+      success: "Audit observation was created successfully"
+    audit_recommendation:
+      success: "Audit recommendation was created successfully"
+
+  audit_compliance:
+    comment:
+      success: "Text response saved successfully"
+    attachment:
+      success: "Attachment has been imported successfully."
+
+  # company:
+  #   domain:
+  #       unique: "Sorry, this domain has already been taken."
+
+  section:
+    create:
+      success: "Section was created successfully."
+      update: "Section was successfully updated."
+      destroy: "Section was successfully destroyed."
+      create: "Section was successfully created."
+      failure: ""
+
+  priorities:
+    create:
+      success: "Section was created successfully."
+      update: "Section was successfully updated."
+      destroy: "Section was successfully destroyed."
+      create: "Section was successfully created."
+      failure: ""
+
+  modulars:
+    create:
+      success: "Section was created successfully."
+      update: "Section was successfully updated."
+      destroy: "Section was successfully destroyed."
+      create: "Section was successfully created."
+      failure: ""
+
+  previlages:
+    create:
+      success: "Previlege was created successfully."
+      failure: "Some of the privileges already added."
+      action: "Please select action to create privilege."
+
+  checklist:
+    create:
+      success: "Checklist was created successfully"
+      failure: "Please select any domain"
+
+  roles:
+    company_admin_failure: "You can't create a role with this title"
+
+  audit:
+    create:
+      success: "Audit has been created successfully"
+    update:
+      success: "Audit has been updated successfully"
+    failure:
+      auditee_blank: "Please select auditee"
+      auditee_unique: "Please select unique auditee"
+      start_date_before_end_date: "End date must not be before start date"
+      auditor_not_in_auditees: "User is already selected as auditor"
+    csv_upload:
+      success: "Audit have been imported successfully"
+
+  risk:
+    failure:
+      owner_not_in_mitigator: "User is already selected as owner"
+    create:
+      success: "Risk has been created successfully"
+    update:
+      success: "Risk has been updated successfully"
+    csv_upload:
+      success: "Risks have been imported successfully"
+
+  checklist_recommendations:
+    recommendation: "Please enter recommendation"
+    priority: "Please select priority"
+    reason: "Please enter reason"
+    severity: "Please select severity"
+    closuredate: "Please select closuredate"
+    status: "Please select status"
+    corrective: "Please enter corrective"
+    preventive: "Please enter preventive"
+    observation: "Please enter observation"
+    is_implemented: "Please select implementation status"
+    remarks: "Please enter remarks"
+
+  answers:
+    detailed_value: "Please enter answer"
+
+  nc_question:
+    csv_upload:
+      success: "Non Compliance Questions have been imported successfully"
+
+  csv_upload:
+    error: "Invalid file format"
+    presence: "Please attach a file."
+
+  compliance_libraries:
+    csv_upload:
+      success: "ComplianceLibrary domains have been imported successfully"
+
+  csv_export:
+    error: "File not found."
+  
+  attachment:
+    file_size_exceeds: "File size exceeds, you can't attach this file"
+
+
+fr:
+
+  location:
+    create:
+      success: "Emplacement a été créé avec succès"
+      update: "Lieu été mis à jour"
+      destroy: "Lieu a été détruit avec succès"
+
+
+  client:
+    create:
+      success: "client a été créé avec succès."
+      update: "client a été mis à jour."
+      destroy: "client a été détruit avec succès."
+
+  Team:
+    create:
+      success: "L'équipe a été créé avec succès."
+      update: "L'équipe a été mise à jour avec succès."
+      destroy: "L'équipe a été détruit avec succès."
+
+  Department:
+    create:
+      success: "Département a été créé avec succès."
+      update: "Département a été mis à jour."
+      destroy: "Département a été détruit avec succès."
+
+  User:
+    create:
+      success: "L'utilisateur a été créé avec succès."
+      update: "L'utilisateur a été mis à jour."
+      destroy: "L'utilisateur a été détruit avec succès."
+
+  Role:
+    create:
+      success: "Rôle a été créé avec succès"
+
+  checklist_recommendation:
+    auditee_create:
+      success: "réponse de l'entité vérifiée a été créé avec succès"
+    audit_observation:
+      success: "observation d'audit a été créé avec succès"
+    audit_recommendation:
+      success: "recommandation d'audit a été créé avec succès"
+
+  audit_compliance:
+    comment:
+      success: "réponse du texte enregistré avec succès"
+
+  # company:
+  #   domain:
+  #       unique: "Désolé, ce domaine a déjà été prise."
+
+  section:
+    create:
+      success: "Section a été créée avec succès."
+      update: "Section a été mise à jour avec succès."
+      destroy: "Section a été détruit avec succès."
+      create: "Section a été créée avec succès."
+      failure: ""
+
+  priorities:
+    create:
+      success: "Section a été créée avec succès."
+      update: "Section a été mise à jour avec succès."
+      destroy: "Section a été détruit avec succès."
+      create: "Section a été créée avec succès."
+      failure: ""
+
+  modulars:
+    create:
+      success: "Section a été créée avec succès."
+      update: "Section a été mise à jour avec succès."
+      destroy: "Section a été détruit avec succès."
+      create: "Section a été créée avec succès."
+      failure: ""
+
+  previlages:
+    create:
+      success: "Previlege a été créé avec succès."
+      failure: "Certains des privilèges déjà ajouté."
+      action: "S'il vous plaît sélectionner l'action pour créer privilège."
+
+  checklist:
+    create:
+      success: "Liste a été créé avec succès"
+      failure: "S'il vous plaît sélectionner n'importe quel domaine"
+
+  roles:
+    company_admin_failure: "Vous ne pouvez pas créer un rôle à ce titre"
+
+  audit:
+    failure:
+      auditee_blank: "S'il vous plaît sélectionner audité"
+      auditee_unique: "S'il vous plaît sélectionner audité uniques"
+      start_date_before_end_date: "Date de fin ne doit pas être avant la date de départ"
+      auditor_not_in_auditees: "L'utilisateur est déjà sélectionné à titre de vérificateur"
+
+  checklist_recommendations:
+    recommendation: "S'il vous plaît entrer recommandation"
+    priority: "S'il vous plaît sélectionner priorité"
+    reason: "S'il vous plaît entrer raison"
+    severity: "S'il vous plaît sélectionner gravité"
+    closuredate: "S'il vous plaît sélectionner closuredate"
+    status: "S'il vous plaît sélectionnez l'état"
+    corrective: "S'il vous plaît entrer correctives"
+    preventive: "S'il vous plaît entrer préventive"
+    observation: "S'il vous plaît entrer observation"
+    is_implemented: "S'il vous plaît sélectionnez l'état de mise en œuvre"
+    remarks: "S'il vous plaît entrer remarques"
+
+  answers:
+    detailed_value: "S'il vous plaît entrer réponse"

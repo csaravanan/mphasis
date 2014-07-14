@@ -1,0 +1,141 @@
+<script>
+	var audit_id = "<%= params[:audit_id]%>"
+</script>
+<div class="clearfix"></div>
+<div class="content">
+  <div class="container">
+    <div class="row">
+      <!-- Nav tabs -->
+     <h4>Response for Compliance Audit</h4>
+      <div id="example" class="k-content">
+        <div class="panel-container">
+          <div id="strip">
+            <div class="row panel-block">
+              <div class="col-md-12">
+                <div class="box-wrapper">
+                  <div id="grid"></div>
+                </div>
+              </div>
+              <div class="fright"><br>
+            <br>
+            <a class="black_btn" href="javascript:goBack()">Back</a>
+            <% unless @audit.audit_status_id == 4%>
+              <%= link_to "Submit for recommendation", audit_audit_compliance_path(id: 'response') , :class => "orange_btn", method: 'PATCH'%>
+            <%end%>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="add_file">
+  <div class="modal-dialog modal-dialog_large">
+    <div class="modal-content">
+  	<!-- Partial file -->
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="add_comment">
+  <div class="modal-dialog modal-dialog_large">
+    <div class="modal-content">
+    <!-- Partial file -->
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+				// dataSource for Kendo grid
+				dataSource = new kendo.data.DataSource({
+					transport: {
+						read: {
+							url: '/audits/'+audit_id+'/audit_compliances/response_checklist',
+							dataType: 'json'
+						}
+					},
+					schema: {
+				        errors: function(response) {
+				         return response.errors;
+				      	},
+						data: "data",
+						model: {
+							id: "id",
+							fields: {
+								id: { type: "string" },
+								name: { type: "string" },
+								artifact_name: { type: "string" },
+								artifact_id: { type: "string" },
+								audit_compliance: { type: "string" },
+								priority: { type: "string" },
+								auditee: {type: "string"},
+								target_date: {type: "string"}
+							}
+						}
+					}
+				});
+    $(document).ready(function() {
+				// Fancybox
+				$(".fancybox").fancybox();
+
+				// Kendo Grid
+				$("#grid").kendoGrid({
+					dataSource: dataSource,
+				    dataBound: function(){
+            var grid = $("#grid").data("kendoGrid");
+            var gridData = grid.dataSource.view();
+            for (var i = 0; i < gridData.length; i++) {
+                var currentUid = gridData[i].uid;
+                if (gridData[i].artifact_id == null) {
+                    var currenRow = grid.table.find("tr[data-uid='" + currentUid + "']");
+                    var editButton = $(currenRow).find(".k-grid-attach");
+                    editButton.hide();
+                }
+            }
+					},
+					height: 'auto',
+					scrollable: true,
+					sortable: true,
+					filterable: true,
+					pageable: {
+					    input: true,
+					    numeric: false
+					},
+					columns: [
+						{ field: "name", title: "Domain"},
+						{ field: "artifact_name", title: "Checklist"},
+						{ field: "priority", title: "Priority"},
+						{ field: "auditee", title: "Owner"},
+						{command: [{text: "attach", click: attach_file},{text: "comment", click: comments}], title: "Response", width: "180px" },
+						{ field: "target_date", title: "Target Date"},
+					],
+					editable: "inline"
+				});
+      });
+			// Edit Popup
+			$(window).load(function(){
+				$(".k-grid-edit").addClass("fancybox").attr("href", "#edit-popup");
+			});
+
+  $('body').on('hidden.bs.modal', '.modal', function () {
+  $(this).removeData('bs.modal');
+});
+
+</script>
+<script>
+function attach_file(e)
+{
+var dataItem = this.dataItem(jQuery(e.currentTarget).closest("tr"));
+$('#add_file').modal({
+  remote: "/artifact_answers/list_attachments?id=" + dataItem.id
+});
+}
+
+function comments(e)
+{
+var dataItem = this.dataItem(jQuery(e.currentTarget).closest("tr"));
+$('#add_comment').modal({
+  remote: "/artifact_answers/list_comment?id=" + dataItem.id
+});
+}
+</script>

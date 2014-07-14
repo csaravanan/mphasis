@@ -1,0 +1,105 @@
+// SASS variable overrides must be declared before loading up Active Admin's styles.
+//
+// To view the variables that Active Admin provides, take a look at
+// `app/assets/stylesheets/active_admin/mixins/_variables.css.scss` in the
+// Active Admin source.
+//
+// For example, to change the sidebar width:
+// $sidebar-width: 242px;
+
+// Active Admin's got SASS!
+@import "active_admin/mixins";
+@import "active_admin/base";
+
+// Overriding any non-variable SASS must be done after the fact.
+// For example, to change the default status-tag color:
+//
+//   .status_tag { background: #6090DB; }
+
+
+input[disabled="disabled"]{
+  background-color: #F4F4F4;
+  border: 0px solid #F4F4F4 !important;
+}
+
+#header {
+  background: none repeat scroll 0 0 #F7F7F7;
+  border-bottom: 5px solid #0085C8;
+  height: 60px;
+}
+
+
+#header ul.tabs > li.current > a,#header ul.tabs > li:hover > a {
+  background-color: #0085C8;
+  color: #FFFFFF;
+}
+
+#header ul.tabs > li a{
+  padding: 19px 10px !important; border-radius:0!important;
+  }
+  #header ul.tabs > li a {
+    color: #181818;
+    text-shadow: none !important;
+}
+
+#title_bar {
+  border: medium none;
+  color: #000;
+}
+
+#title_bar h2 {
+  font-size: 1.5em;
+  text-shadow: none;
+}
+
+.breadcrumb{
+  background-color: #999999!important;text-shadow: none;
+}
+
+.breadcrumb a{ color:#fff!important;text-shadow: none;}
+
+form fieldset legend span {
+  background: none repeat scroll 0 0 #0085C8 !important;
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: normal;
+    padding: 8px 5px;
+    text-shadow: none;}
+
+.label {
+  color: #181818 !important;
+  font-size: 1em !important;
+  font-weight: normal !important;
+  text-align: left !important;
+
+}
+#footer {
+  /*background-color: #363535;*/
+  color: #9F9D9D;
+  height: 70px;
+  padding: 25px 0;
+}
+.dropdown-menu > li > a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857;
+    color: rgb(51, 51, 51);
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+#privilege_modular {
+  margin: 0 10px 20px 0;
+}
+
+
+#grid {
+    margin-bottom: 25px;
+}
+
+.btn-group, .btn-group-vertical {
+  margin: 0 10px 0 0;
+
+}

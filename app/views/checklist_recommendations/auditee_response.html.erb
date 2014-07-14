@@ -1,0 +1,68 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "/assets/views/checklist_recommendations.js" %>
+<% end %>
+<div class="clearfix"></div>
+  <div class="content">
+    <div class="container">
+      <div class="row">
+        <!-- Nav tabs -->
+        <div class="tab_main_title">Auditee Response</div>
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div class="tab-pane active" id="all">
+            <div class="table-responsive">
+              <table class="table table-striped list-table">
+                <tr>
+                  <th colspan="6"><%= @audit.title.truncate(50) %></th>
+                </tr>
+                <tr>
+                  <td><label>Client : </label>
+                    <span> <%= @audit.client_name if @audit.client.present? %></span></td>
+                  <td><label>Scope : </label>
+                    <span><%= @audit.scope.truncate(50) %> </span></td>
+                  <td><label>Team : </label>
+                    <span> <%= @audit.team_name unless @audit.team.nil?%></span></td>
+                </tr>
+                <tr>
+                  <td><label>Start Date : </label>
+                    <span> <%= @audit.start_date %></span></td>
+                  <td><label>End Date : </label>
+                    <span><%= @audit.end_date %> </span></td>
+                  <td><label>Deliverables : </label>
+                    <span><%= @audit.deliverables unless @audit.nil?%></span></td>
+                </tr>
+                <tr>
+                  <td><label>Objective : </label>
+                    <span> <%= @audit.objective.truncate(50) if @audit.objective?%></span></td>
+                  <td><label>Context : </label>
+                    <span> <%= @audit.context.truncate(50) if @audit.context?%></span></td>
+                  <td><label>Methodology :</label>
+                    <span> <%= @audit.methodology.truncate(50) if @audit.methodology?%> </span></td>
+                </tr>
+                <tr>
+                  <td><label>Issues : </label>
+                    <span><%= @audit.issue.truncate(50) if @audit.issue?%> </span></td>
+                  <td><label>Compliance : </label>
+                    <span> <%= @audit.compliance_type %> </span></td>
+                  <td><label><%= @audit.compliance_type == 'Compliance' ? "Standard" : "Topic"%> :</label>
+                    <span><%= standard_name(@audit) %> </span></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="container">
+            <% if @audit.compliance_type == 'Compliance' %>
+				      <%= render "response_auditee",controls: @answered_compliances, checklist_recommendations: @checklist_recommendations, audit: @audit, auditee_recommendation: @auditee_recommendation %>
+            <% else %>
+              <%= render "nc_response_auditee", response_answers: @response_answers, audit: @audit, auditee_recommendation: @auditee_recommendation, nc_question: @nc_question  %>
+            <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<link href="/assets/outer/jquery.ui.core.min.css" rel="stylesheet" type="text/css">
+<link href="/assets/outer/jquery.ui.theme.min.css" rel="stylesheet" type="text/css">
+<link href="/assets/outer/jquery.ui.accordion.min.css" rel="stylesheet" type="text/css">
+<script src="/assets/outer/jquery-ui-1.9.2.accordion.custom.min.js" type="text/javascript"></script>
+

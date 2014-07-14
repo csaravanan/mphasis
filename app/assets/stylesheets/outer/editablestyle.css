@@ -1,0 +1,20 @@
+.backspace { margin-left: -4px; }
+
+.k-calendar-container .k-link{
+	 color: #2E2E2E;
+}
+.k-state-disabled, .k-state-disabled .k-link, .k-state-disabled .k-button, .k-button.k-state-disabled:active, .k-other-month .k-link, .k-dropzone em, .k-tile-empty strong, .k-slider .k-draghandle {
+    color: #9F9E9E;
+}
+
+.k-loading-hidden{
+	display: none;
+}
+
+.file-list{
+	padding: 8px 0 0 10px;
+}
+.file-body{
+	 padding: 0 0 0 12px;
+}
+.success_msg{ color: #59C774;font-size: 12px;padding: 0 30px 0 0;}

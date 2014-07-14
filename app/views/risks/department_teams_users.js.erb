@@ -1,0 +1,21 @@
+<% if params[:location_id].present? %>
+  <% select = select_tag(:department_id, options_for_select(@departments.collect{|x| [x.name, x.id]}), {:include_blank => 'Please Select', :id => "department_id", :class => "form-control", :onChange => "get_teams(this);"}) -%>
+  $('#department_id').replaceWith('<%= escape_javascript(select) %>');
+  $('#department_id').attr('name', 'risk[department_id]');
+  $('.ajax-loader').hide();
+<% elsif params[:department_id].present? %>
+  <% select = select_tag(:team_id, options_for_select(@teams.collect{|x| [x.name, x.id]}), {:include_blank => 'Please Select', :id => "team_id", :class => "form-control", :onChange => "get_risk_owners(this);"}) -%>
+  $('#team_id').replaceWith('<%= escape_javascript(select) %>');
+  $('#team_id').attr('name', 'risk[team_id]');
+  $('.ajax-loader-department').hide();
+<% elsif params[:team_id].present? %>
+  <% select = select_tag(:owner, options_for_select(@team_users.uniq.collect{|x| [x.user_name, x.id]}), {:include_blank => 'Please Select', :class => "form-control", :id => "risk-owner"}) %>
+  $('#risk-owner').replaceWith('<%= escape_javascript(select) %>');
+  $('#risk-owner').attr('name', 'risk[owner]');
+  $('.ajax-loader-team').hide();
+<% elsif params[:compliance_id].present? %>
+  <% select = select_tag(:compliance_library_id, options_for_select(@compliance_libraries.collect{|x| [x.name, x.id]}), {:include_blank => 'Please Select', :id=>"risk_compliance_library_id", :class => "form-control"}) -%>
+  $('#risk_compliance_library_id').replaceWith('<%= escape_javascript(select) %>');
+  $('#risk_compliance_library_id').attr('name', 'risk[compliance_library_id]');
+  $('.ajax-loader').hide();
+<% end %>

@@ -1,0 +1,36 @@
+
+@media all and (max-width: 479px) {
+	.k-tabstrip .k-tabstrip-items {
+		padding: 3px 10px 0;
+	}
+	
+	.k-tabstrip-items .k-link, .k-panelbar .k-tabstrip-items .k-link {
+		font-size: 13px;
+		padding: 0.5em 0.3em;
+	}
+	
+	.k-tabstrip-items .k-item, .k-panelbar .k-tabstrip-items .k-item {
+		margin-right: 5px;
+	}
+	
+	.editable-select {
+		width: 92%;
+	}
+	
+	.editable-input {
+		width: 82%;
+	}
+}
+
+@media all and (max-width: 399px) {
+	.editable-select {
+		width: 90%;
+	}
+	.editable-input {
+		width: 79%;
+	}
+	
+	.k-pager-input, .k-pager-sizes {
+		padding: 0 4px;
+	}
+}

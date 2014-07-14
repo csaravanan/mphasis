@@ -1,0 +1,213 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>printout</title>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+
+<style type="text/css">
+body{ font-family: 'Open Sans', sans-serif;}
+.wrapper{ margin:0 auto; width:800px; padding:20px 0;}
+.wrapper table{ font-size:12px;}
+.wrapper table td{ text-align:center;}
+h2{ font-size:18px; font-weight:bold;}
+h4{ font-size:14px; font-weight:bold;}
+.textaligncenter{ text-align:center;}
+.cls{ clear:both;}
+.side{ width:100%;}
+.leftside{ width:50%; float:left;}
+.rightside{ width:50%; float:left;}
+.leftside label,.rightside label {float: left;padding: 5px 10px; font-weight:bold;width: 35%; font-size:12px;}
+.label_content {
+  padding: 5px 0;font-size:12px;
+}
+label {float: left;padding: 5px 10px; font-weight:bold;width: 35%; font-size:12px;}
+.line{ border-bottom:1px solid #989898; height:1px; padding:25px 0 0;}
+.paddingbottom{ padding-bottom: 50px;}
+.logo{height: 50px; border-bottom:5px solid #0085C8; font-size: 30px; text-align: center;}
+</style>
+</head>
+
+<body>
+<!-- Wrapper Start-->
+<div class="wrapper">
+
+  <div class="logo">
+
+  </div>
+<!--Title Start-->
+<h2 class="textaligncenter">Report for Audit</h2>
+<!--Title Start-->
+<div class="cls"></div>
+<!-- SideContent Start-->
+<div class="side">
+<!-- Leftside Content Start-->
+<div class="leftside">
+<label>Audit Title: </label>
+<div class="label_content"><%= @audit.title %></div>
+<label>Start Date: </label>
+<div class="label_content"><%= @audit.start_date %></div>
+<div class="cls"></div>
+
+<label>Audit Type :</label>
+<div class="label_content"><%= @audit.audit_type_name %></div>
+
+</div>
+<!-- Leftside Content End-->
+<!-- Rightside Content Start-->
+<div class="rightside">
+<br>
+<label>End Date : </label>
+<div class="label_content"><%= @audit.end_date %></div>
+<div class="cls"></div>
+
+
+<label> Compliance Type : </label>
+<div class="label_content"><%= @audit.compliance_type %></div>
+
+</div>
+<!-- Rightside Content End-->
+</div>
+<div class="cls"></div>
+<div class="line"></div>
+<div class="cls"></div>
+
+<label>Objective: </label>
+<div class="label_content"><%= @audit.objective %></div>
+<div class="cls"></div>
+<label>Context :</label>
+<div class="label_content"><%= @audit.context %></div>
+<div class="cls"></div>
+<label> Scope : </label>
+<div class="label_content"><%= @audit.scope %></div>
+<div class="cls"></div>
+<label> Deliverables : </label>
+<div class="label_content"><%= @audit.deliverables %></div>
+<div class="cls"></div>
+
+
+<!-- SideContent End-->
+<div class="paddingbottom"></div>
+<!-- Client Audited Start-->
+<h2 class="textaligncenter">Client Audited</h2>
+<table border="1px" cellpadding="5" cellspacing="0" bordercolor="#ADADAD" width="100%">
+<tr>
+<th width="30%">Location</th>
+<th width="35%">Client</th>
+<th width="35%">Department</th>
+</tr>
+<tr>
+<td><%= @audit.location_name %></td>
+<td><%= @audit.client_name %></td>
+<td><%= @audit.department_name %>
+</td>
+
+</table>
+<!-- Client Audited End-->
+<div class="cls"></div>
+<!--Team Auditor Start-->
+<h2 class="textaligncenter">Team</h2>
+<h4>Auditor</h4>
+<table border="1px" cellpadding="5" cellspacing="0" bordercolor="#ADADAD" width="100%">
+<tr>
+<th width="50%">Name</th>
+<th width="50%">Email-Id</th>
+</tr>
+<tr>
+<td><%= @audit.auditory_full_name %></td>
+<td><%= @audit.auditory_email %></td>
+</tr>
+</table>
+<!--Team Auditor End-->
+
+<div class="cls"></div>
+<!--Team Auditee Start-->
+<h2>Auditee</h2>
+<table border="1px" cellpadding="5" cellspacing="0" bordercolor="#ADADAD" width="100%">
+<tr>
+<th width="50%">Name</th>
+<th width="50%">Email-Id</th>
+</tr>
+<% @audit.auditees.each do |f| %>
+
+<tr>
+<td><%= f.full_name %></td>
+<td><%= f.email %></td>
+</tr>
+<% end %>
+</table>
+<!--Team Auditee End-->
+<div class="cls"></div>
+<div class="line"></div>
+<div class="cls"></div>
+<!--Recommendations Start-->
+
+<h2 class="textaligncenter">Recommendations</h2>
+<% @audit.checklist_recommendations.each do |f| %>
+<!-- SideContent Start-->
+<div class="side">
+<!-- Leftside Content Start-->
+<div class="leftside">
+<label>Client : </label>
+<div class="label_content"><%= @audit.client_name %></div>
+</div>
+
+<label>Closure Priority : </label>
+<div class="label_content"><%= f.recommendation_priority_name %></div>
+
+<!-- Leftside Content End-->
+<!-- Rightside Content Start-->
+<div class="rightside">
+<label>Status : </label>
+<div class="label_content"><%= f.recommendation_status_name %></div
+></div>
+<!-- Rightside Content End-->
+</div>
+<!-- SideContent End-->
+<div class="cls"></div>
+
+<!--Auditor Recommendation Start -->
+<table border="1px" cellpadding="5" cellspacing="0" bordercolor="#ADADAD" width="100%">
+<tr><th>Auditor Recommendation</th></tr>
+<tr>
+
+<td><%= f.recommendation %></td>
+</tr>
+</table>
+<!--Auditor Recommendation End -->
+<div class="cls"></div>
+<div class="line"></div>
+<div class="cls"></div>
+
+
+<h2 class="textaligncenter">Action for this recommendation</h2>
+<table border="1px" cellpadding="5" cellspacing="0" bordercolor="#ADADAD" width="100%">
+<tr>
+<th>Corrective Action</th>
+<th>Preventive Action</th>
+</tr>
+<tr>
+<td><%= f.corrective %></td>
+<td><%= f.preventive %></td>
+</tr>
+</table>
+
+<div class="cls"></div>
+<h2 class="textaligncenter">Recommendation and Response Summary</h2>
+
+<table border="1px" cellpadding="5" cellspacing="0" bordercolor="#ADADAD" width="100%">
+<tr>
+<th width="50%">Observations</th>
+<th width="50%">Remarks</th>
+</tr>
+<tr>
+<td rowspan="4"><%= f.observation%></td>
+<td><%= f.remark_comment %></td>
+</tr>
+</table>
+<% end %>
+</div>
+<!-- Wrapper End-->
+
+</body>
+</html>

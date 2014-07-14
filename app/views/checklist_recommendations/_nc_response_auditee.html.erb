@@ -1,0 +1,201 @@
+<div id="Accordion1">
+  <% response_answers.each do |answer| %>
+    <% checklist_recommendation = answer.checklist_recommendation %>
+    <!--   <h3><a href="#"><%#= control.name%></a> <span class="fright pending_msg">Pending</span></h3> -->
+    <h3><a href="#"><%= answer.question %></a> <span class="fright pending_msg" id= "response_status"><%= checklist_recommendation.response_status_id == audit_response_status ? 'Completed' : 'Pending'%></span></h3>
+    <div>
+      <div class="row audit-title">
+
+
+                <%= form_tag auditee_response_create_audit_checklist_recommendations_path(audit),:remote=>true, multipart: true do %>
+                  <div class="col-lg-4">
+                  <div class="form-group clearfix">
+                      <label class="col-sm-5"><b>Artifact :</b> </label>
+                      <div class="col-sm-7"><%= link_to (File.basename(answer.attachment.attachment_file_url)).truncate(20), artifacts_download_audits_path(id: answer.attachment.id), class: "blue_link" if(answer.attachment.present? && answer.attachment.attachment_file_url.present?) %> </div>
+                    </div>
+                    <div class="form-group clearfix">
+                      <label  class="col-sm-5"><b>Recommendation :</b> </label>
+                      <div class="col-sm-7"><%= checklist_recommendation.recommendation%></div>
+                    </div>
+                    <div class="form-group clearfix">
+                      <label  class="col-sm-5"><b>Priority :</b> </label>
+                      <div class="col-sm-7"> <%= checklist_recommendation.recommendation_priority_name%></div>
+                    </div>
+                    <div class="form-group clearfix">
+                      <label class="col-sm-5">Corrective Action</label>
+                      <div class="col-sm-7">
+                        <input class="audit-big-input" type="text" id="corrective_<%= checklist_recommendation.id%>" name="checklist_recommendation[corrective]" value= "<%= checklist_recommendation.corrective if checklist_recommendation.present? %>">
+                      <span class="error_message" id="error_corrective_<%= checklist_recommendation.id%>" style="display:none;"><%= MESSAGES["checklist_recommendations"]["corrective"]%><span>
+                      </div>
+                    </div>
+
+                    <div class="form-group clearfix">
+                      <label class="col-sm-5 control-label">Status</label>
+                      <div class="col-sm-7">
+                <%= select("checklist_recommendation", "response_status_id", options_from_collection_for_select(ResponseStatus.all, :id, :name,checklist_recommendation.present? ? {selected: checklist_recommendation.response_status_id} : {}), {}, {:id=> "response_status_id_#{checklist_recommendation.id}" }) %>
+                <span class="error_message" id="error_status_<%= checklist_recommendation.id%>" style="display:none;"><%= MESSAGES["checklist_recommendations"]["status"]%><span>
+                      </div>
+                    </div>
+
+                    <div class="form-group clearfix">
+                      <div class="col-sm-12">
+                        <a class="attach-icon fleft blue_link" href="#" onclick="$('#auditee_attachment_<%= checklist_recommendation.id%>').click();" >Attach Document</a>
+                            <div class="form-group clearfix ">
+                            <div class="col-sm-12">
+                              <%= "<h4>Attachments</h4>".html_safe if checklist_recommendation.response_attachments.present?%>
+                              <%checklist_recommendation.response_attachments.each do |attachment|%>
+                                <div id="attach_<%= attachment.id%>"><%= link_to (File.basename(attachment.attachment_file_url)).truncate(20), download_artifacts_audit_checklist_recommendations_path(id: attachment.id), class: "blue_link" if attachment.attachment_file_url %>
+                                <%unless(audit.audit_status_id == audit_status)%>
+                                <div class="addissue" style="float: right;"> <%= link_to "remove", remove_attachment_audit_checklist_recommendations_path(id: attachment.id ), data: { confirm: "Are you sure?" }, method: :delete, remote: true, class: "minus-icon"%>
+                                </div>
+                                <%end%>
+                                </div>
+                              <%end%>
+                            </div>
+                          <%= file_field_tag "checklist_recommendation[attachment]", :style => "visibility:hidden; display:none;",  :id => "auditee_attachment_#{checklist_recommendation.id}", onchange: "display_selected_files(this)"%>
+                        <div class="clearfix" id="selected_files"></div>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="form-group clearfix">
+                      <label class="col-sm-5"><b>Answer :</b> </label>
+                      <div class="col-sm-7">
+											<div class="col-sm-7">
+                        <% if answer.present? %>
+                          <% if answer.question_type_name == 'Yes or No' %>
+                            <%= answer.value == 0 ? 'Yes' : 'No' %>
+                          <% elsif answer.question_type_name == 'Descriptive Type' %>
+                            <%= answer.detailed_value %>
+                          <% elsif answer.question_type_name == 'Multiple Choice' %>
+                            <%= answer.question_option.value if answer.value.present? %>
+                          <% end %>
+                        <% end %>
+                      </div>
+											</div>
+
+                    </div>
+                    <div class="form-group clearfix">
+                      <label  class="col-sm-5"><b>Reason :</b> </label>
+                      <div class="col-sm-7"><%= checklist_recommendation.reason%></div>
+
+                    </div>
+                    <div class="form-group clearfix">
+                      <label  class="col-sm-5"><b>Severity :</b> </label>
+                      <div class="col-sm-7"> <%= checklist_recommendation.recommendation_severity_name%></div>
+                    </div>
+                    <div class="form-group clearfix">
+                      <label class="col-sm-5">Preventive Action</label>
+                      <div class="col-sm-7">
+                        <input class="audit-big-input" type="text" id="preventive_<%= checklist_recommendation.id%>" name="checklist_recommendation[preventive]" value= "<%= checklist_recommendation.preventive if checklist_recommendation.present? %>">
+                      <span class="error_message" id="error_preventive_<%= checklist_recommendation.id%>" style="display:none;"><%= MESSAGES["checklist_recommendations"]["preventive"]%><span>
+                      </div>
+                    </div>
+                    <div class="form-group clearfix">
+                      <label class="col-sm-5 control-label">Priority</label>
+                      <div class="col-sm-7">
+                      <%= select("checklist_recommendation", "response_priority_id", options_from_collection_for_select(Priority.all, :id, :name,  checklist_recommendation.present? ? {selected: checklist_recommendation.response_priority_id} : {} ), {}, {:id => "response_priority_id_#{checklist_recommendation.id}" }) %>
+                  <span class="error_message" id="error_priority_<%= checklist_recommendation.id%>" style="display:none;"><%= MESSAGES["checklist_recommendations"]["priority"]%><span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-4"><div class="form-group clearfix">
+                      <label class="col-sm-5"><b>Target Date :</b> </label>
+                      <div class="col-sm-7"> <%= checklist_recommendation.closure_date%></div>
+
+                    </div>
+                    <div class="form-group clearfix">
+                      <label  class="col-sm-5"><b>Status :</b> </label>
+                      <div class="col-sm-7"> <%= checklist_recommendation.recommendation_status_name%></div>
+
+                    </div>
+
+                    <div class="form-group clearfix">
+                    <label  class="col-sm-5">Issues </label>
+
+                    <div class="col-sm-7">
+                    <div class="block_link">
+                    <!--<a class="active" href="">Blocking Recommandation</a>-->
+                    <a type="button" class="active" href="#myModal1" data-toggle="modal" onclick="recommendation(<%= checklist_recommendation.id%>);">Blocking Recommandation</a>
+                    <a type="button" href="#myModal" onclick="recommendation(<%= checklist_recommendation.id%>);" data-toggle="modal" >Dependent Recomandation</a>
+                    <%= hidden_field_tag "checklist_recommendation[dependent_recommendation]", checklist_recommendation.dependent_recommendation , :id => "dependent_recommendation_#{checklist_recommendation.id}"%>
+                    <%= hidden_field_tag "checklist_recommendation[blocking_recommendation]",  checklist_recommendation.blocking_recommendation , :id => "blocking_recommendation_#{checklist_recommendation.id}"%>
+                    </div>
+                    </div>
+
+                    </div>
+                    <div class="form-group clearfix">
+                      <label class="col-sm-5 control-label">Severity</label>
+                      <div class="col-sm-7">
+                          <%= select("checklist_recommendation", "response_severity_id", options_from_collection_for_select(Priority.all, :id, :name, checklist_recommendation.present? ? {selected: checklist_recommendation.response_severity_id} : {} ), {}, {:id => "response_severity_id_#{checklist_recommendation.id}" }) %>
+                          <span class="error_message" id="error_severity_<%= checklist_recommendation.id%>" style="display:none;"><%= MESSAGES["checklist_recommendations"]["severity"]%><span>
+                      </div>
+                    </div>
+                      <%= hidden_field_tag "checklist_recommendation[id]",  checklist_recommendation.id , :id => "id_#{checklist_recommendation.id}"%>
+                    <div class="form-group clearfix">
+                    <div class="col-sm-12 ">
+                     <%unless(audit.audit_status_id == audit_status)%>
+                      <input type="submit" value="Respond" class="black_btn fright" onclick="auditee_response(<%= checklist_recommendation.id%>);">
+                    <%end%>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+              </div>
+            <% end %>
+            <% end %>
+          </div>
+
+
+ <div id="myModal" class="modal fade">
+    <div class="modal-dialog modal-dialog_large modal-dialog_addwidget">
+        <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &nbsp; </button>
+              <!--popup content Start-->
+              <div class="model-header">
+                <div class="modal-title">Dependent Recommendation</div>
+              </div>
+                <div class="model-con">
+                  <div class="form-group clearfix">
+                    <label>Recommendation : </label>
+                    <div class="clearfix"></div>
+                      <div class="select_outer">
+                        <%= select("checklist_recommendation", "dependent_recommendation", options_from_collection_for_select(auditee_recommendation, :id, :recommendation), {:prompt => "-Select-"}, {:id =>"dependent_recommendation_id" }) %>
+                      </div>
+                       <%= hidden_field_tag "checklist_recommendation[id]",  0 , :id => "cheklist_id"%>
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="modal-footer"> <input type="button" value="Submit" class="orange_btn" onclick="dependent_recommendation_select();"> <input type="button" value="Cancel" class="black_btn"></div>
+               </div>
+          </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="myModal1" class="modal fade">
+    <div class="modal-dialog modal-dialog_large modal-dialog_addwidget">
+        <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &nbsp; </button>
+              <!--popup content Start-->
+              <div class="model-header">
+                <div class="modal-title">Blocking Recommendation</div>
+              </div>
+                <div class="model-con">
+                  <div class="form-group clearfix">
+                    <label>Recommendation : </label>
+                    <div class="clearfix"></div>
+                      <div class="select_outer">
+                        <%= select("checklist_recommendation", "dependent_recommendation", options_from_collection_for_select(auditee_recommendation, :id, :recommendation), {:prompt => "-Select-"}, {:id =>"blocking_recommendation_id" }) %>
+                      </div>
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="modal-footer">   <input type="button" value="Submit" class="orange_btn" onclick="blocking_recommendation_select();"> <input type="button" value="Cancel" class="black_btn"> </div>
+               </div>
+          </div>
+        </div>
+    </div>
+</div>

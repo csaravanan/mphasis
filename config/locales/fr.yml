@@ -1,0 +1,308 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+fr:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: "Email peut pas être vide"
+              invalid: "Email est invalide"
+            full_name:
+              blank: "Nom complet ne peut pas être vide"
+              invalid: "Nom complet doit contenir alphabets"
+              too_short:
+                other: "Nom complet doit contenir moins 8 omble"
+            user_name:
+              blank: "Nom d'utilisateur ne peut être vide"
+              invalid: "Nom d'utilisateur doit contenir alphabets"
+              too_short:
+                other: "Nom d'utilisateur doit contenir au moins 8 car"
+              too_long:
+                other: "Nom d'utilisateur devrait contient maximum de 52 ombles"
+              taken: "Nom d'utilisateur a déjà été utilisée"
+            role_id:
+              blank: "Rôle ne peut pas être vide"
+        profile:
+          attributes:
+            phone_no:
+              not_a_number: "S'il vous plaît, entrez un numéro de téléphone valide"
+              wrong_length:
+                other: "Téléphone devrait être de 10 chiffres"
+            address1:
+              too_long:
+                other: "Adresse ligne 1 ne peut pas dépasser 40 caractères"
+              too_short:
+                other: "Adresse ligne 1 ne peut pas être inférieur à 7 caractères"
+            address2:
+              too_long:
+                other: "Adresse ligne 2 ne peut pas dépasser 40 caractères"
+              too_short:
+                other: "Adresse ligne 2 ne peut pas être inférieur à 7 caractères"
+        company:
+          attributes:
+            name:
+              blank: "Nom de l'entreprise ne peut pas être vide"
+              invalid: "Nom de l'entreprise doit être alphanumérique"
+              invalid: "S'il vous plaît entrer un nom de société valide"
+              too_long:
+                other: "Nom de l'entreprise ne peut pas dépasser 50 caractères"
+              too_short:
+                other: "Nom de l'entreprise ne peut pas être inférieure à 2 caractères"
+            address1:
+              too_long:
+                other: "Adresse ligne 1 ne peut pas dépasser 40 caractères"
+              too_short:
+                other: "Adresse ligne 1 ne peut pas être inférieur à 7 caractères"
+            address2:
+              too_long:
+                other: "Adresse ligne 2 ne peut pas dépasser 40 caractères"
+              too_short:
+                other: "Adresse ligne 2 ne peut pas être inférieur à 7 caractères"
+            domain:
+              blank: "Nom de domaine ne peut pas être vide"
+              taken: "Le nom de domaine est déjà pris. S'il vous plaît essayez un autre nom"
+              invalid: "Le nom de domaine doit contenir alphabets"
+              too_long:
+                other: "Le nom de domaine ne peut pas dépasser 25 caractères"
+              too_short:
+                other: "Nom de domaine ne peut pas être inférieure à 2 caractères"
+            secondary_email:
+              invalid: "Secondaire Email est invalide"
+            primary_email:
+              invalid: "Courriel principal est invalide"
+            contact_no:
+              not_a_number: "n'est pas un nombre"
+              wrong_length:
+                other: "Contactez ne devrait être de 10 chiffres"
+        language:
+          attributes:
+            name:
+              blank: "Langue ne peut pas être vide"
+              taken: "Cette langue a déjà été ajouté"
+              invalid: "Nom de la langue doit être une lettre"
+              too_short:
+                other: "Langue doit contenir au moins 3 car"
+            code:
+              blank: "Code de langue ne peut pas être vide"
+              taken: "Le code doit être unique"
+              invalid: "Le code doit être alphabétique"
+              wrong_length:
+                other: "Longueur du code devrait être de deux caractères"
+        client:
+          attributes:
+            name:
+              blank: "Le nom du client ne peut être vide"
+              invalid: "Le nom du client doit contenir alphabets"
+              too_short:
+                other: "nom du client doit contenir au minimum de 4 char"
+              too_long:
+                other: "nom du client doit contient maximum de 52 ombles"
+            contact_no:
+              not_a_number: "n'est pas un nombre"
+              blank: "Numéro de contact ne peut pas être vide"
+              wrong_length:
+                other: "Contactez ne devrait être de 10 chiffres"
+            address1:
+              too_short:
+                other: "Adresse doit contenir au minimum de 7 omble"
+              too_long:
+                other: "Adresse devrait contient maximum de 40 caractères"
+            address2:
+              too_short:
+                other: "Adresse doit contenir au minimum de 7 omble"
+              too_long:
+                other: "Adresse devrait contient maximum de 40 caractères"
+            email:
+              blank: "Email peut pas être vide"
+              invalid: "Email est invalide"
+              taken: "Courriel a déjà été utilisée"
+        compliance:
+          attributes:
+            name:
+              blank: "Nom de la conformité ne peut pas être vide"
+              taken: "Nom de conformité a déjà été utilisée"
+              invalid: "Nom de conformité doit contenir alphanumérique"
+              too_short:
+                other: "Conformité doit contenir au moins 2 omble"
+        department:
+          attributes:
+            name:
+              blank: "Le nom du service ne peut pas être vide"
+              invalid: "Le nom du service doit contenir alphanumérique"
+            location_id:
+              blank: "Localisation peut pas être vide"
+        location:
+          attributes:
+            name:
+              blank: "Nom de l'emplacement ne peut pas être vide"
+              invalid: "Nom de l'emplacement doit contenir alphanumérique"
+              taken: "Nom de l'emplacement a déjà été utilisée"
+              too_short:
+                other: "Localisation doit contenir au minimum de 7 omble"
+              too_long:
+                other: "Numéro de contact devrait contient maximum de 10 chiffres"
+        question_type:
+          attributes:
+            name:
+              blank: "type de question ne peut pas être vide"
+              invalid: "nom du type de question doit contenir alphabets"
+              taken: "nom du type de question a déjà été utilisée"
+              too_short:
+                other: "type de question doit contenir au minimum de 4 char"
+        role:
+          attributes:
+            title:
+              blank: "rôle ne peut pas être vide"
+              invalid: "nom du type de rôle doit contenir alphabets"
+              taken: "rôle a déjà été utilisée"
+        team:
+          attributes:
+            name:
+              blank: "Nom de l'équipe ne peut pas être vide"
+              invalid: "Nom de l'équipe doit contenir alphanumérique"
+              taken: "nom d'équipe a déjà été utilisée"
+        priority:
+          attributes:
+            name:
+              blank: "nom de priorité ne peut pas être vide"
+              taken: "nom de priorité a déjà été utilisée"
+              invalid: "nom de priorité doit contenir alphanumérique"
+        section:
+          attributes:
+            name:
+              blank: "nom de la section ne peut pas être vide"
+              taken: "Section nom a déjà été utilisé"
+              invalid: "nom section doit contenir des chiffres"
+              too_short:
+                other: "Section doit contenir au minimum de 4 char"
+        modular:
+          attributes:
+            model_name:
+              blank: "Nom du modèle ne peut pas être vide"
+              taken: "Nom du modèle a déjà été utilisée"
+              invalid: "Nom du modèle doit contenir alphanumérique"
+              too_short:
+                other: "Modèle doit contenir au minimum de 4 char"
+            action_name:
+              blank: "Nom de l'action ne peut pas être vide"
+              taken: "nom d'action a déjà été utilisée"
+              invalid: "Nom de l'action doit contenir alphanumérique"
+              too_short:
+                other: "Action devrait comporter au moins 4 char"
+            section_id:
+              blank: "nom de la section ne peut pas être vide"
+        topic:
+          attributes:
+            name:
+              blank: "Sujet ne peut pas être vide"
+              taken: "Sujet a déjà été utilisée"
+              invalid: "Sujet doit contenir alphanumérique"
+              too_short:
+                other: "Localisation doit contenir au minimum de 4 char"
+        attachment:
+          attributes:
+            attachment_file:
+              size_too_big: "la taille du fichier de la pièce jointe est trop grand"
+        compliance_library:
+          attributes:
+            name:
+              blank: "Nom ne peut pas être vide"
+            compliance_id:
+              blank: "La conformité ne peut pas être vide"
+        operational_area:
+          attributes:
+            compliance_library_id:
+              taken: "Déjà marqué! s'il vous plaît mettre à jour!"
+
+  companies:
+    company:  "Nom de l'entreprise"
+    primary_email: "Primaire Email"
+    secondary_email: "Email secondaire"
+    domain: "Sous domaine"
+    address1: "Adresse Ligne 1"
+    address2: "Adresse Ligne 2"
+    contact: "Contact"
+    country: "Pays"
+    timezone: Sélectionnez le fuseau horaire
+
+  modulars:
+    model_name: "Nom du modèle"
+    action_name: "Nom de l'action"
+    section: "Section"
+
+  profile:
+    email: "Email"
+    name: "Nom"
+    username: "Nom d'utilisateur"
+    timezone: "Fuseau horaire"
+    language: "Langue"
+    Contact: "Contact"
+    address1: "Adresse 1"
+    address2: "Adresse 2"
+    city: "Ville"
+    state: "État"
+    country: "Pays"
+    role: "Role"
+
+
+  priorities:
+    name: "Nom"
+
+  section:
+    name: "Nom"
+
+  location:
+    name: "Nom"
+
+  users:
+    username:  "Nom d'utilisateur"
+    email: "Email"
+
+  system:
+    hello:  "Bonjour"
+
+  audit:
+    title: "Titre de la vérification"
+    objective: "Objectif"
+    deliverables: "livrables"
+    context: "Contexte"
+    issues: "Enjeux"
+    scope: "portée"
+    methodology: "Méthodologie"
+    audit_type: "Type de vérification"
+    compliance_type: "Type de conformité"
+    standard : "Standard"
+    topic : "Sujet"
+    location : "Location"
+    department : "département"
+    start_date : "date de début"
+    end_date : "Date de fin"
+
+  nc_question:
+    request: "Demande"
+    resp_type: "Type de réponse"
+    assign_auditee: "Attribuer Audité"
+    target_date: "Date de cible"
+    priority: "Priorité"
+    need_doc: "Besoin document?"
+    save_to_lib: "Enregistrer la requête de librairie"

@@ -1,0 +1,8 @@
+name,compliance,parent,is_leaf
+Domain1,COBIT,,
+ControlObjective1.1,COBIT,Domain1,
+Control1.1.1,PCI DSS,ControlObjective1.1,TRUE
+Domain2,COBIT,,
+ControlObjective2.1,COBIT,Domain2,
+Control2.1.1,COBIT,ControlObjective2.1,TRUE
+Control2.1.2,COBIT,ControlObjective2.1,TRUE

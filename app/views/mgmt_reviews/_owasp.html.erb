@@ -1,0 +1,120 @@
+<div  class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-7 control-label mgt-label">Skill Level:</label>
+      <div class="col-sm-5 mgt-text"><%= r.risk_scoring.scoring.owasp_skill_level if r.risk_scoring.present? %></div>
+    </div>
+  </div>
+  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-7 control-label mgt-label">Motive:</label>
+      <div class="col-sm-5 mgt-text"><%= r.risk_scoring.scoring.owasp_motive if r.risk_scoring.present? %></div>
+    </div>
+  </div>
+  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-7 control-label mgt-label">Opportunity:</label>
+      <div class="col-sm-5 mgt-text"><%= r.risk_scoring.scoring.owasp_opportunity if r.risk_scoring.present? %></div>
+    </div>
+  </div>
+  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-7 control-label mgt-label">Size:</label>
+      <div class="col-sm-5 mgt-text"><%= r.risk_scoring.scoring.owasp_size if r.risk_scoring.present? %></div>
+    </div>
+  </div>
+  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-7 control-label mgt-label">Awareness:</label>
+      <div class="col-sm-5 mgt-text"><%= r.risk_scoring.scoring.owasp_awareness if r.risk_scoring.present? %></div>
+    </div>
+  </div>
+    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-7 control-label mgt-label">Loss of Confidentiality:</label>
+      <div class="col-sm-5 mgt-text"><%= r.risk_scoring.scoring.owasp_loss_of_confidentiality if r.risk_scoring.present? %></div>
+    </div>
+  </div>
+    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-7 control-label mgt-label">Loss of Integrity:</label>
+      <div class="col-sm-5 mgt-text"><%= r.risk_scoring.scoring.owasp_loss_of_integrity if r.risk_scoring.present? %></div>
+    </div>
+  </div>
+    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-7 control-label mgt-label">Privacy Violation:</label>
+      <div class="col-sm-5 mgt-text"><%= r.risk_scoring.scoring.owasp_privacy_violation if r.risk_scoring.present? %></div>
+    </div>
+  </div>
+</div>
+
+
+<div  class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-7 control-label mgt-label">Intrusion Detection:</label>
+      <div class="col-sm-5 mgt-text"><%= r.risk_scoring.scoring.owasp_intrusion_detection if r.risk_scoring.present? %></div>
+    </div>
+  </div>
+  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-7 control-label mgt-label">Ease of Discovery:</label>
+      <div class="col-sm-5 mgt-text"><%= r.risk_scoring.scoring.owasp_ease_of_discovery if r.risk_scoring.present? %></div>
+    </div>
+  </div>
+  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-7 control-label mgt-label">Ease of Exploit:</label>
+      <div class="col-sm-5 mgt-text"><%= r.risk_scoring.scoring.owasp_ease_of_exploit if r.risk_scoring.present? %></div>
+    </div>
+  </div>
+  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-7 control-label mgt-label">Loss of Accountability:</label>
+      <div class="col-sm-5 mgt-text"><%= r.risk_scoring.scoring.owasp_loss_of_accountability if r.risk_scoring.present? %></div>
+    </div>
+  </div>
+  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-7 control-label mgt-label">Loss of Availability:</label>
+      <div class="col-sm-5 mgt-text"><%= r.risk_scoring.scoring.owasp_loss_of_availability if r.risk_scoring.present? %></div>
+    </div>
+  </div>
+  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-7 control-label mgt-label">Non Compliance:</label>
+      <div class="col-sm-5 mgt-text"><%= r.risk_scoring.scoring.owasp_non_compliance if r.risk_scoring.present? %></div>
+    </div>
+  </div>
+  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-7 control-label mgt-label">Financial Damage:</label>
+      <div class="col-sm-5 mgt-text"><%= r.risk_scoring.scoring.owasp_financial_damage if r.risk_scoring.present? %></div>
+    </div>
+  </div>
+  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-7 control-label mgt-label">Reputation Damage:</label>
+      <div class="col-sm-5 mgt-text"><%= r.risk_scoring.scoring.owasp_reputation_damage if r.risk_scoring.present? %></div>
+    </div>
+  </div>
+
+</div>
+
+<div  class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+  <div class="row-sp">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-7 control-label mgt-label">Effectiveness :</label>
+        <div class="col-sm-5 mgt-text"><%= r.control_measure.effectiveness if r.control_measure.present? %></div>
+    </div>
+    <div class="form-group" >
+      <label for="inputEmail3" class="col-sm-7 control-label mgt-label ">Threat :</label>
+      <div class="col-sm-5 mgt-text"><%= r.control_measure.threat if r.control_measure.present? %></div>
+    </div>
+    <div  class="form-group" >
+      <label for="inputEmail3" class="col-sm-7 control-label mgt-label">Consequence :</label>
+      <div class="col-sm-5 mgt-text"><%= r.control_measure.consequence if r.control_measure.present?%></div>
+    </div>
+  </div>
+</div>

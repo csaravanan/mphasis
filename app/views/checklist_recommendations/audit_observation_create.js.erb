@@ -1,0 +1,11 @@
+<% if @checklist_recommendation.errors.present? %>
+<% if @attachment_error.present? %>
+new Messi("<%=  MESSAGES["attachment"]["file_size_exceeds"] %>", {title: 'Error', titleClass: 'error', autoclose: 1500});
+<% else %>
+new Messi("sorry this audit already published", {title: 'Warning', titleClass: 'warning', autoclose: 1500});
+<% end %>
+<% else %>
+new Messi("<%=  MESSAGES["checklist_recommendation"]["audit_observation"]["success"] %>", {title: 'Success', titleClass: 'success', autoclose: 1500});
+$('#observation_status').html('Completed')
+<% end %>
+var publish = <%= @pending_observation%>

@@ -1,0 +1,17 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "/assets/views/dashboard.js" %>
+<% end %>
+<script type="text/javascript" src="/assets/full_calendar.js"></script>
+<link href="/assets/outer/fullcalendar.css" rel="stylesheet" />
+<link href="/assets/outer/fullcalendar.print.css" rel="stylesheet" />
+<link href="/assets/outer/style.css" rel="stylesheet" />
+<div class="tab-pane" id="event-calendar">
+	<div class="box">
+		<div class="box-header" data-original-title>
+		</div>
+		<div class="box-content">
+			<div id="calendar"></div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</div>

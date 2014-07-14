@@ -1,0 +1,136 @@
+<%= javascript_include_tag "/assets/views/users.js" %>
+<div class="clearfix"></div>
+<div class="content">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="page_heading">User Profile</div>
+				<%if @user.errors[:"attachment.attachment_file"].present?%>
+		<div class="error_message">Error: <%=  @user.errors[:"attachment.attachment_file"][0]%></div>
+<% end %>
+      </div>
+    </div>
+    <div class="row user_main">
+      <div class="profile_photo_block">
+        <div class="">
+        <%= form_for(@user, :url => { :action => "update" }) do |f| %>
+          <%= f.fields_for :attachment, (f.object.attachment.blank? ? Attachment.new : nil) do |attach| %>
+            <div>
+              <%= attach.label :attachment, "Profile Photo" %><br />
+              <div class="profile_photo">
+                <%= image_tag((@user.attachment.present? && @user.attachment_attachment_file.present?) ? @user.attachment_attachment_file.thumb : "/assets/outer/face-image.jpg", :id => "profile_img", :class => "profile_img") %>
+                <div class="profile_photo_sec">
+                </div>
+              </div>
+              <%= attach.file_field :attachment_file, :accept=>"image/*", :onChange=>"addFiles(this)", :class=>"image-select", :style=>"display:none;"%>
+							<%= attach.hidden_field :company_id, :value => "#{current_company.id}"%>
+            </div>
+          <% end %>
+         </div>
+      </div>
+
+
+      <div class="profile_form col-lg-8">
+				<div class="form-group clearfix">
+						<label class="col-sm-4"> <%= f.label :email, t('profile.email') %></label>
+						<div class="col-sm-7">
+						 <%= @user.email %>
+						</div>
+				</div>
+        <div class="form-group clearfix">
+            <label class="col-sm-4"> <%= f.label :email, t('profile.role') %></label>
+            <div class="col-sm-7">
+             <%= @user.role.title.humanize.capitalize %>
+            </div>
+        </div>
+				<div class="form-group clearfix">
+						<label class="col-sm-4"> <%= f.label :full_name, t('profile.name') %></label>
+						<div class="col-sm-7 <%='error_inputfield' if @user.errors[:full_name].present?%>">
+						<%= f.text_field :full_name %>
+						<%if @user.errors[:full_name].present?%>
+						<div class="error_message"><%=  @user.errors[:full_name][0]%></div>
+						<% end %>
+						</div>
+				</div>
+				<div class="form-group clearfix">
+						<label class="col-sm-4"> <%= f.label :user_name, t('profile.username') %></label>
+						<div class="col-sm-7 <%='error_inputfield' if @user.errors[:user_name].present?%>">
+						 <%= f.text_field :user_name%>
+						 <%if @user.errors[:user_name].present?%>
+						<div class="error_message"><%=  @user.errors[:user_name][0]%></div>
+						<% end %>
+						</div>
+				</div>
+				<div class="form-group clearfix">
+						<label class="col-sm-4"> <%= f.label :timezone, t('profile.timezone') %></label>
+						<div class="col-sm-7">
+						<%= f.select :timezone, Company::TIMEZONES, :selected => @user.timezone %>
+						</div>
+				</div>
+				<div class="form-group clearfix">
+						<label class="col-sm-4"> <%= f.label :language_id, t('profile.language') %></label>
+						<div class="col-sm-7">
+							<%= f.select :language_id, options_for_select(Language.all.collect{|x| [x.name, x.id]}, :selected => @user.language_id) %>
+						</div>
+				</div>
+				<%= f.fields_for :profile do |profile| %>
+				<div class="form-group clearfix">
+						<label class="col-sm-4"> <%= profile.label :phone_no, t('profile.contact') %></label>
+						<div class="col-sm-7 <%='error_inputfield' if @user.errors[:"profile.phone_no"].present?%>">
+							<%= profile.text_field :phone_no %>
+							<%if @user.errors[:"profile.phone_no"].present?%>
+							<div class="error_message"><%=  @user.errors[:"profile.phone_no"][0]%></div>
+							<% end %>
+						</div>
+				</div>
+				<div class="form-group clearfix">
+						<label class="col-sm-4"><%= profile.label :address1, t('profile.address1') %></label>
+						<div class="col-sm-7 <%='error_inputfield' if @user.errors[:"profile.address1"].present?%>">
+							<%= profile.text_field :address1 %>
+							<%if @user.errors[:"profile.address1"].present?%>
+							<div class="error_message"><%=  @user.errors[:"profile.address1"][0]%></div>
+							<% end %>
+						</div>
+				</div>
+				<div class="form-group clearfix">
+						<label class="col-sm-4"><%= profile.label :address2, t('profile.address2') %></label>
+						<div class="col-sm-7 <%='error_inputfield' if @user.errors[:"profile.address2"].present?%>">
+							<%= profile.text_field :address2 %>
+							<%if @user.errors[:"profile.address2"].present?%>
+							<div class="error_message"><%=  @user.errors[:"profile.address2"][0]%></div>
+							<% end %>
+						</div>
+				</div>
+				<div class="form-group clearfix">
+						<label class="col-sm-4"><%= profile.label :city, t('profile.city') %></label>
+						<div class="col-sm-7 <%='error_inputfield' if @user.errors[:"profile.city"].present?%>">
+							<%= profile.text_field :city %>
+							<%if @user.errors[:"profile.city"].present?%>
+							<div class="error_message"><%=  @user.errors[:"profile.city"][0]%></div>
+							<% end %>
+						</div>
+				</div>
+				<div class="form-group clearfix">
+						<label class="col-sm-4"><%= profile.label :state, t('profile.state') %></label>
+						<div class="col-sm-7 <%='error_inputfield' if @user.errors[:"profile.state"].present?%>">
+							<%= profile.text_field :state %>
+							<%if @user.errors[:"profile.state"].present?%>
+							<div class="error_message"><%=  @user.errors[:"profile.state"][0]%></div>
+							<% end %>
+						</div>
+				</div>
+				<div class="form-group clearfix">
+						<label class="col-sm-4"><%= profile.label :country, t('profile.country') %></label>
+						<div class="col-sm-7">
+							<%= profile.collection_select(:country_id, Country.all, :id, :name, {include_blank: '--Select Language--'}, {:class =>"btn btn-default"})  %>
+						</div>
+				</div>
+				<% end %>
+        <div class="fright col-lg-11 ">
+          <%= f.submit "Update", :class => "orange_btn org-sp" %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

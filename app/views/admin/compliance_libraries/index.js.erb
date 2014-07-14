@@ -1,0 +1,4 @@
+<% @compliance_libraries.each do |compliance_library| %>
+console.log(@compliance_libraries);
+ dataSource.insert(0,{id: <%= compliance_library.id%>, compliance_id: "<%= compliance_library.compliance_id%>", name: "<%= compliance_library.name%>", is_leaf: "<%= compliance_library.is_leaf%>, parent_id: "<%= compliance_library.parent_id%>"});	
+<%end%>

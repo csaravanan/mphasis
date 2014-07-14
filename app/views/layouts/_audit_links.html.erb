@@ -1,0 +1,9 @@
+	<input type="hidden" id="module" value="0">
+<ul class="subbar-nav nav navbar-nav">
+	<li><a href="/admin/operational_areas" class="<%= request.fullpath.include?("/admin/operational_areas") == true ? 'active' : '' %>">
+		Weightage</a></li>
+	<li><a href="/admin/artifacts" class="<%= request.fullpath.include?("/admin/artifacts") == true ? 'active' : '' %>">
+		Artifacts</a></li>
+	<li><a href="/admin/reminders" class="<%= request.fullpath.include?("/admin/reminders") == true ? 'active' : '' %>">
+		Reminder</a></li>
+</ul>

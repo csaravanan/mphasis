@@ -1,0 +1,51 @@
+Settings - Score Card 
+
+1. create a model for score card 
+	 rails g model score_card criteria:string  weightage:integer
+2. rake db: migrate 
+3. create a controller for score card 
+	rails g controller score_cards index 
+4. In controller score_card 
+	def index	
+	       @scores = ScoreCard.all
+	        @score = ScoreCard.find(params[:id])
+	            if @score.update_attributes(params[:score])
+	                 redirect_to root_path
+	            end
+	end
+5. In Index File : 
+	<% scores.each do |s| %>
+	<table>
+	 	<tr>
+	 		<th> Assessment Criteria</th>
+	 		<th> Weightage</th>
+	 	</tr>
+	 	<tr>
+	 		<td> <%= s.criteria %></td>
+	 		<%= form_for(@score) do |f| %>
+	 		<td><%= t.text_field :weightage %></td>
+	 		<% end %>
+	 	</tr>
+	</table>
+<% end %>
+
+6. In app/views/layout/_menu.html.erb 
+  
+	<li><a href="/score_cards">Score Card</a>
+
+7. In config/routes.rb 
+
+	match '/score_cards' => 'score_card#index' , :as => '/score_cards'
+
+8. In db/seed.rb 
+
+	ScoreCard.create([{criteria: '' , weightage: '1'}])
+repeat this for all criteria , Add value to the criteria inside the quotes
+
+7. run rake db:seed 
+
+First do the 8th and 7 th step 
+8. db/seed.rb 
+
+
+	

@@ -1,0 +1,37 @@
+<div class="content">
+<div class="container">    
+      <!-- Nav tabs -->
+     <div class="risk-title">Subscription </div>
+     <div class="clearfix"></div>
+    	<div class="">
+        	<div class="row">
+			<%= form_for @plan do |f|%>
+			<% @subscriptions.each do |subscription| %>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+            <div class="plan">
+                <div class="head">
+                    <h2><%= subscription.name%></h2>
+                </div>
+                <ul class="item-list">
+										<li><strong><%= subscription.description%></strong> Description</li>
+                    <li><strong><%= subscription.file_size%>MB</strong> Storage</li>
+                    <li><strong><%= subscription.user_count%></strong> Sign ups</li>
+                    <li><strong><%= company_modules(subscription)%></strong> Modules </li>
+                    <li><strong><%= subscription.valid_log%>Month(s)</strong> Valid period</li>
+                    <!--<li>24/7 Email & Phone <strong>support</strong></li>-->
+                </ul>
+                <div class="price">
+                    <h3><%= subscription.amount%></h3>
+                    <h4>per month</h4>
+                </div>
+                <a href="<%= new_company_path(subscription: subscription.name)%>"><button type="button" class="btn btn-warning">Sign Up</button></a>
+            </div>
+        </div>
+        <%end%>
+        <%end%>
+    </div>
+		</div>
+  </div>
+  </div>
+	  <%= render :partial => "layouts/footer"  %>
+

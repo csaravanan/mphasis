@@ -1,0 +1,33 @@
+<div class="page-wrap">
+  <div class="content">
+    <div class="container">
+      <div class="row">
+        <div id="example" class="k-content">
+          <div class="risk-title">Edit Risk</div>
+
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="risk-wrap">
+              <div class="sub-wrap">
+                <div class="sub-titile">Risk</div>
+                <div class="sub-wrap-bg">
+                  <%= form_for(@risk) do |f| %>
+                    <%= render 'form', :f => f, :risk => @risk, :departments => @departments, :teams => @teams, :team_users => @team_users, :compliance_libraries => @compliance_libraries %>
+                    <div class="row">
+                      <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
+                        <div class="btn-group gr-btn save-file">
+                          <%= f.submit "Initiate Risk", :class => "orange_btn" if @risk.risk_status_name == "Draft"%>
+                          <%= f.submit "Update Risk", :class => "grey_btn" %>
+                          <a class="black_btn" href="javascript:goBack()">Back</a>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

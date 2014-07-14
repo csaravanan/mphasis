@@ -1,0 +1,4 @@
+<h4><%= "Attachment lists" if  attachments.present?%></h4>
+  <% attachments.each do |attachment|%>
+    <p class="file-list" id="attach_<%= attachment.id%>"><%= File.basename(attachment.attachment_file_url)%> <%= link_to "remove", remove_attachment_artifact_answers_path(id: attachment.id ), data: { confirm: "Are you sure?" }, method: :delete, remote: true%></p>
+  <%end%>

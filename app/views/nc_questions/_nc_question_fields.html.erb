@@ -1,0 +1,79 @@
+<fieldset class="fields">
+          <div class="col-lg-4 col-sm-6 col-xs-12">
+            <div class="form-group clearfix">
+              <%= f.label :question, t('nc_question.request'), :class => "col-sm-4" %>
+              <div class="col-sm-7 <%#='error_inputfield' if (audit.errors["nc_questions.question"].present? && f.object.question.blank?) %>">
+                <%= f.text_field :question, :class => "audit-normal-input" %>
+                 <%if (audit.errors["nc_questions.question"].present? && f.object.question.blank?) %>
+                   <div class="error_message"><%=  audit.errors["nc_questions.question"][0]%></div>
+                  <% end %>
+              </div>
+            </div>
+            <div class="form-group clearfix">
+              <%= f.label :question_type_id, t('nc_question.resp_type'), :class => "col-sm-4 control-label" %>
+              <div class="col-sm-7">
+                <%= f.collection_select(:question_type_id, QuestionType.all, :id, :name, {}, {class: 'question_response'}) %>
+              </div>
+
+            </div>
+            <div class="form-group clearfix">
+            <div class="col-sm-7 add-btn <%= 'hidden-item' if(f.object.question_type_id != 3)%>">
+                <%= f.fields_for :question_options,(f.object.question_options.present? ? f.object.question_options : QuestionOption.new) do |builder| %>
+                  <%= render 'question_option_fields', :f => builder %>
+                <% end %>
+                <div class="form-group clearfix addissue">
+                  <%= link_to_add_choices "", f, :question_options %>
+              </div>
+
+              </div>
+            </div>
+               <!-- <a href="#" class="add-btn-padding"><img src="/assets/outer/add-btn.jpg" alt=""/></a>          -->
+
+
+          </div>
+          <div class="col-lg-4 col-sm-6 col-xs-12">
+            <div class="form-group clearfix">
+              <%= f.label :auditee_id, t('nc_question.assign_auditee'), :class => "col-sm-4 control-label" %>
+              <div class="col-sm-7">
+                <%= f.collection_select(:auditee_id, audit.auditees, :id, :full_name)  %>
+              </div>
+            </div>
+            <div class="form-group clearfix">
+              <%= f.label :target_date, t('nc_question.target_date'), :class => "col-sm-4 control-label" %>
+              <div class="col-sm-7 <%='error_inputfield' if (audit.errors["nc_questions.target_date"].present? && f.object.target_date.blank?) %>">
+                <div class="form-group">
+                    <%#= f.date_field :target_date, :class => "form-control" %>
+                    <%= f.text_field :target_date, value: (f.object.target_date.strftime("%d/%m/%Y") if f.object.target_date.present?), :class => "datepicker", :style =>"width:150px;" %>
+                    <%if (audit.errors["nc_questions.target_date"].present? && f.object.target_date.blank?) %>
+                      <div class="error_message"><%=  audit.errors["nc_questions.target_date"][0]%></div>
+                    <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-sm-6 col-xs-12">
+          <div class="form-group clearfix">
+              <%= f.label :priority_id, t('nc_question.priority'), :class => "col-sm-4 control-label" %>
+              <div class="col-sm-7">
+                <%= f.collection_select(:priority_id, Priority.all, :id, :name)  %>
+              </div>
+            </div>
+            <div class="form-group clearfix">
+              <%= f.label :does_require_document, t('nc_question.need_doc'), :class => "col-sm-5" %>
+              <%= f.check_box :does_require_document %>  <br>
+            </div>
+        <div class="form-group clearfix">
+          <div class="col-sm-12">
+              <%= f.label :nc_library, t('nc_question.save_to_lib') %>
+              <%= f.check_box :nc_library %>
+          </div>
+        </div>
+          </div>
+            <div class="form-group clearfix addissue">
+              <%= link_to_remove_fields "Remove Request", f %>
+            </div>
+          <div class="clearfix border-divider"> </div>
+
+</fieldset>
+
+

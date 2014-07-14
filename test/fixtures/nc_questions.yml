@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  question: MyString
+  audit_id: 1
+  question_type_id: 1
+  priority_id: 1
+  target_date: 2014-05-30
+  does_require_document: false
+  company_id: 1
+  auditee_id: 1
+  nc_library: false
+
+two:
+  question: MyString
+  audit_id: 1
+  question_type_id: 1
+  priority_id: 1
+  target_date: 2014-05-30
+  does_require_document: false
+  company_id: 1
+  auditee_id: 1
+  nc_library: false

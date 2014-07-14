@@ -1,0 +1,16 @@
+<% if @nc_questions.present? %>
+  <% @nc_questions.each do |nc_question| %>
+    <% time_stamp = "#{SecureRandom.random_number((2**(0.size * 8-2)-1))}"[0..6]  %>
+    $('#questions_libraries').append("<%= j render(:partial => 'library_questions', :locals => { :f => nc_question, :time_variable => time_stamp, :priorities => @priorities, :response_types => @response_types, :audit => @audit, :auditees => @auditees }) %>");
+    $("#audit_nc_questions_attributes_<%= time_stamp %>_target_date").kendoDatePicker({
+      min: new Date(),
+       format: "dd/MM/yyyy"
+    }).data("kendoDatePicker");
+     $('#audit_nc_questions_attributes_<%= time_stamp %>_target_date').attr('readonly', true);
+      $("#audit_nc_questions_attributes_<%= time_stamp %>_target_date").bind("focus", function() {
+        $(this).data("kendoDatePicker").open();
+      });
+    <% end %>
+    $('.ajax-loader').hide();
+    $('.overlay-loader').hide();
+<% end %>

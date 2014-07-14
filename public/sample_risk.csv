@@ -1,0 +1,2 @@
+subject,reference_id,compliance,control,location,department,team,category,technology,owner,mitigator,reviewer,risk_description,notes
+Subject,A11111,ISO 27001,Control Name,New York,Finance,Team,Access Management,Telecom,owner@example.com,mitigator@example.com,reviewer@example.com,Detailed Description,Additional Notes

@@ -1,0 +1,13 @@
+	<input type="hidden" id="module" value="0">
+<ul class="subbar-nav nav navbar-nav" >
+		<li><a href="/admin/controls" class="<%= request.fullpath.include?("admin/controls") == true ? 'active' : '' %>" >
+			Controls</a></li>
+			<li><a href="/admin/procedures" class="<%= request.fullpath.include?("admin/procedures") == true ? 'active' : '' %>" >
+			Procedures</a></li>
+			<li><a href="/admin/processes" class="<%= request.fullpath.include?("admin/processes") == true ? 'active' : '' %>" >
+			Process</a></li>
+			<li><a href="/admin/risk_review_levels" class="<%= request.fullpath.include?("admin/risk_review_levels") == true ? 'active' : '' %>" >
+			Review Levels</a></li>
+			<li><a href="/admin/projects" class="<%= request.fullpath.include?("admin/projects") == true ? 'active' : '' %>" >
+			Projects</a></li>
+	</ul>

@@ -1,0 +1,91 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "/assets/views/answers.js" %>
+<% end %>
+<div id="wrapper">
+  <div class="clearfix"></div>
+  <div class="content">
+    <div class="container">
+      <div class="row">
+        <div class="tab_main_title">Auditee Response</div>
+        <div class="tab-content">
+          <div class="tab-pane active" id="all">
+            <div class="table-responsive">
+              <table class="table table-striped list-table">
+                <tr>
+                  <th colspan="6"><%= @audit.title %></th>
+                </tr>
+                <tr>
+                  <td><label>Client : </label>
+                    <span><%= @audit.client_name%></span></td>
+                  <td><label>Title : </label>
+                    <span><%= @audit.title %></span></td>
+                  <td><label>Scope : </label>
+                    <span><%= @audit.scope %></span></td>
+                </tr>
+                <tr>
+                  <td><label>Team : </label>
+                    <span><%= @audit.team_name %></span></td>
+                  <td><label>Start Date : </label>
+                    <span><%= @audit.start_date %></span></td>
+                  <td><label>End Date : </label>
+                    <span><%= @audit.end_date %></span></td>
+                </tr>
+                <tr>
+                  <td><label>Delivarable : </label>
+                    <span><%= @audit.deliverables %></span></td>
+                  <td><label>Objective : </label>
+                    <span><%= @audit.objective %></span></td>
+                  <td><label>Context :</label>
+                    <span><%= @audit.context %></span></td>
+                </tr>
+                <tr>
+                  <td><label>Method : </label>
+                    <span><%= @audit.methodology %></span></td>
+                  <td><label>Issues : </label>
+                    <span><%= @audit.issue %></span></td>
+                  <td><label>Compliance : </label>
+                    <span><%= @audit.compliance_type %></span></td>
+                </tr>
+                <tr>
+                  <td><label>Topic :</label>
+                    <span><%= standard_name(@audit) %></span></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="container">
+            <%= form_for :answer,  :url => "/audits/#{params[:audit_id]}/answers", :html => { :multipart => true } do |f|%>
+              <div id="Accordion1">
+                <% @current_auditee_nc_questions.each do |question| %>
+                  <h3><a href="#"><%= question.question %></a> <span class="fright <%= question.answer.blank? ? "pending_msg" : "success_msg" %>"><%= question.answer.blank? ? "Pending" : "Completed" %></span></h3>
+                    <div>
+                      <div class="row audit-title">
+                        <% test = question.answer || question.build_answer %>
+                          <%= hidden_field_tag :audit_id, @audit.id %>
+                          <%= render "answer_type", :question => question, audit: @audit %>
+                      </div>
+                    </div>
+                <% end %>
+            </div>
+
+              <div class="clearfix"></div>
+              <div class="clearfix"></div>
+              <div class="fright paddingtop">
+                <%= f.submit "Save Draft", :class => "black_btn", :onclick=>"return answer_response();" %>
+                <%= f.submit "Submit Answers to Auditor", :class => "orange_btn", :onclick=>"return answer_response();" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<link href="/assets/outer/jquery.ui.core.min.css" rel="stylesheet" type="text/css">
+<link href="/assets/outer/jquery.ui.theme.min.css" rel="stylesheet" type="text/css">
+<link href="/assets/outer/jquery.ui.accordion.min.css" rel="stylesheet" type="text/css">
+<script src="/assets/outer/jquery-1.8.3.min.js" type="text/javascript"></script>
+<script src="/assets/outer/jquery-ui-1.9.2.accordion.custom.min.js" type="text/javascript"></script>
+

@@ -1,0 +1,41 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  subject: MyString
+  control_number: MyString
+  assessment: MyText
+  notes: MyText
+  risk_status_id: 1
+  reference: 1
+  compliance_id: 1
+  location_id: 1
+  category_id: 1
+  team_id: 1
+  technology_id: 1
+  owner: 1
+  review_date: 2014-06-18
+  project_id: 1
+  submitted_by: 1
+  risk_approval_status_id: 1
+  company_id: 1
+  risk_model_id: 1
+
+two:
+  subject: MyString
+  control_number: MyString
+  assessment: MyText
+  notes: MyText
+  risk_status_id: 1
+  reference: 1
+  compliance_id: 1
+  location_id: 1
+  category_id: 1
+  team_id: 1
+  technology_id: 1
+  owner: 1
+  review_date: 2014-06-18
+  project_id: 1
+  submitted_by: 1
+  risk_approval_status_id: 1
+  company_id: 1
+  risk_model_id: 1

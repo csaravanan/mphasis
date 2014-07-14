@@ -1,0 +1,189 @@
+<%= f.fields_for :risk_scoring, ((f.object.risk_scoring.present? && f.object.risk_scoring.scoring_type == "CvssScoring") ? f.object.risk_scoring : RiskScoring.new) do |scoring| %>
+   <%if mitigation_page%>
+    <%= scoring.hidden_field :scoring_type%>
+    <% end %>
+  <%= scoring.fields_for :scoring, (scoring.object.scoring.present? ? scoring.object.scoring : CvssScoring.new) do |cvss_scoring| %>
+    <div class="row cvss_scoring" style='<%= "display:block" if risk_scoring_type_cvss(risk) %>'>
+      <div class="likelihood matrix-padding clearfix">
+        <div class="base-score-matrix">CVSS Score Metrics
+          <div class="up-triangle"></div>
+        </div>
+
+        <!-- Exploitability Metrics -->
+        <div class="">
+          <div class="exploitability"><u>Base Score Metrics</u></div>
+          <div class="exploitability">Exploitability Metrics</div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+              <div class="form-group">
+                <div class="col-sm-12">
+                    <%= cvss_scoring.label :cvss_access_vector, t('cvss.att_vec') %>
+                  <div class="risk-select">
+                    <%= cvss_scoring.collection_select(:cvss_access_vector, CvssMetricScoring.for_name("AccessVector"), :id, :metric_value, { :selected => (cvss_scoring.object.cvss_access_vector if cvss_scoring.object.cvss_access_vector.present?), :class =>"form-control"}) %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+              <div class="form-group">
+                <div class="col-sm-12">
+                  <%= cvss_scoring.label :cvss_access_complexity, t('cvss.att_compl') %>
+                  <div class="risk-select">
+                    <%= cvss_scoring.collection_select(:cvss_access_complexity, CvssMetricScoring.for_name("AccessComplexity"), :id, :metric_value, {:class =>"form-control"})  %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+              <div class="form-group">
+                <div class="col-sm-12">
+                  <%= cvss_scoring.label :cvss_authentication, t('cvss.auth') %>
+                  <div class="risk-select">
+                    <%= cvss_scoring.collection_select(:cvss_authentication, CvssMetricScoring.for_name("Authentication"), :id, :metric_value, {:class =>"form-control"})  %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Exploitability Metrics -->
+
+          <!-- Impact Metrics -->
+          <div class="">
+          <div class="exploitability">Impact Metrics</div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+              <div class="form-group">
+                <div class="col-sm-12">
+                    <%= cvss_scoring.label :cvss_conf_impact, t('cvss.conf_imp') %>
+                  <div class="risk-select">
+                    <%= cvss_scoring.collection_select(:cvss_conf_impact, CvssMetricScoring.for_name("ConfImpact"), :id, :metric_value, {:class =>"form-control"})  %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+              <div class="form-group">
+                <div class="col-sm-12">
+                  <%= cvss_scoring.label :cvss_integ_impact, t('cvss.int_imp') %>
+                  <div class="risk-select">
+                    <%= cvss_scoring.collection_select(:cvss_integ_impact, CvssMetricScoring.for_name("IntegImpact"), :id, :metric_value, {:class =>"form-control"})  %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+              <div class="form-group">
+                <div class="col-sm-12">
+                  <%= cvss_scoring.label :cvss_avail_impact, t('cvss.avail_imp') %>
+                  <div class="risk-select">
+                    <%= cvss_scoring.collection_select(:cvss_avail_impact, CvssMetricScoring.for_name("AvailImpact"), :id, :metric_value, {:class =>"form-control"})  %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Impact Metrics -->
+
+          <!-- Temporal Scoring Metrics -->
+          <div class="">
+          <div class="exploitability"><u>Temporal Score Metrics</u></div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+              <div class="form-group">
+                <div class="col-sm-12">
+                    <%= cvss_scoring.label :cvss_exploitability, t('cvss.exploi') %>
+                  <div class="risk-select">
+                    <%= cvss_scoring.collection_select(:cvss_exploitability, CvssMetricScoring.for_name("Exploitability"), :id, :metric_value, {:class =>"form-control"})  %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+              <div class="form-group">
+                <div class="col-sm-12">
+                  <%= cvss_scoring.label :cvss_remediation_level, t('cvss.remed_level') %>
+                  <div class="risk-select">
+                    <%= cvss_scoring.collection_select(:cvss_remediation_level, CvssMetricScoring.for_name("RemediationLevel"), :id, :metric_value, {:class =>"form-control"})  %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+              <div class="form-group">
+                <div class="col-sm-12">
+                  <%= cvss_scoring.label :cvss_report_confidence, t('cvss.report_conf') %>
+                  <div class="risk-select">
+                    <%= cvss_scoring.collection_select(:cvss_report_confidence, CvssMetricScoring.for_name("ReportConfidence"), :id, :metric_value, {:class =>"form-control"})  %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Temporal Scoring Metrics -->
+
+          <!-- Environmental Score Metrics -->
+          <div class="">
+          <div class="exploitability"><u>Environmental Score Metrics</u></div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+              <div class="form-group">
+                <div class="col-sm-12">
+                    <%= cvss_scoring.label :cvss_collateral_damage_potential, t('cvss.coll_damage_pot') %>
+                  <div class="risk-select">
+                    <%= cvss_scoring.collection_select(:cvss_collateral_damage_potential, CvssMetricScoring.for_name("CollateralDamagePotential"), :id, :metric_value, {:class =>"form-control"})  %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+              <div class="form-group">
+                <div class="col-sm-12">
+                  <%= cvss_scoring.label :cvss_target_distribution, t('cvss.tar_dist') %>
+                  <div class="risk-select">
+                    <%= cvss_scoring.collection_select(:cvss_target_distribution, CvssMetricScoring.for_name("TargetDistribution"), :id, :metric_value, {:class =>"form-control"})  %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            </div>
+            <div class="emp-hr clearfix"></div>
+          </div>
+          <!-- Environmental Score Metrics -->
+
+          <!-- Impact Subscore Modifiers -->
+          <div class="">
+          <div class="exploitability">Impact Subscore Modifiers</div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+              <div class="form-group">
+                <div class="col-sm-12">
+                    <%= cvss_scoring.label :cvss_confidentiality_requirement, t('cvss.conf_req') %>
+                  <div class="risk-select">
+                    <%= cvss_scoring.collection_select(:cvss_confidentiality_requirement, CvssMetricScoring.for_name("ConfidentialityRequirement"), :id, :metric_value, {:class =>"form-control"})  %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+              <div class="form-group">
+                <div class="col-sm-12">
+                  <%= cvss_scoring.label :cvss_integrity_requirement, t('cvss.int_req') %>
+                  <div class="risk-select">
+                    <%= cvss_scoring.collection_select(:cvss_integrity_requirement, CvssMetricScoring.for_name("IntegrityRequirement"), :id, :metric_value, {:class =>"form-control"})  %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+              <div class="form-group">
+                <div class="col-sm-12">
+                  <%= cvss_scoring.label :cvss_availability_requirement, t('cvss.avail_req') %>
+                  <div class="risk-select">
+                    <%= cvss_scoring.collection_select(:cvss_availability_requirement, CvssMetricScoring.for_name("AvailabilityRequirement"), :id, :metric_value, {:class =>"form-control"})  %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Impact Subscore Modifiers -->
+      </div>
+    </div>
+  <% end %>
+<% end %>
+

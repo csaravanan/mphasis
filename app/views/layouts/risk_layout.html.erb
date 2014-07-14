@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AuditRisk</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <link rel="stylesheet" type="text/css" href="/assets/outer/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/assets/outer/style.css">
+    <link rel="stylesheet" type="text/css" href="/assets/outer/docs.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/outer/media.css">
+    <link rel="stylesheet" type="text/css" href="/assets/outer/kendo.default.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/outer/kendo.common.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/outer/jquery.fancybox.css">
+    <link href="/assets/outer/style1.css" rel="stylesheet" media="screen">
+    <link href="/assets/messi.min.css" rel="stylesheet" media="screen">
+    <link href="/assets/outer/mediaqueries.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" type="text/css" href="/assets/outer/editablestyle.css">
+    <script src="/assets/outer/masonry.pkgd.min.js"></script>
+    <script src="/assets/outer/messi.js"></script>
+   <script src="/assets/outer/kendo.all.min.js" type="text/javascript"></script>
+   <script src="/assets/outer/kendo.web.min.js" type="text/javascript"></script>
+   <script src="/assets/outer/jquery.fancybox.js" type="text/javascript"></script>
+   <script type="text/javascript" src="/assets/messi.min.js"></script>
+    <%= yield :head%>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div id="wrapper">
+  <%= render :partial => "layouts/risk_header" if user_signed_in? %>
+  <%= yield %>
+  <%= yield :javascript_includes%>
+  <%= render :partial => "layouts/footer" if user_signed_in? %>
+</div>
+</body>
+</html>

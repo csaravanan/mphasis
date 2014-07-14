@@ -1,0 +1,25 @@
+<link href="http://cdn.kendostatic.com/2014.1.416/styles/kendo.common.min.css" rel="stylesheet" />
+<link href="http://cdn.kendostatic.com/2014.1.416/styles/kendo.default.min.css" rel="stylesheet" />
+<script src="http://cdn.kendostatic.com/2014.1.416/js/kendo.all.min.js"></script>
+<script type="text/javascript" src="/assets/messi.min.js"></script>
+<script>
+var role_id = "<%= params[:role_id]%>";
+var privilege_error = "<%= MESSAGES["previlages"]["create"]["action"] %>";
+</script>
+<%= javascript_include_tag "views/privileges" %>
+<%  role = Role.title(params[:role_id])%>
+<div id="flash"></div>
+<%= active_admin_form_for [:admin, @privilege] , :remote => true do |f| %>
+<%#= hidden_field_tag(request_forgery_protection_token.to_s, form_authenticity_token) %>
+		 <h2> Assign privilege for : </i><%= role%></i></h2>
+		 <%= f.hidden_field :role_id, {:value => params[:role_id]}%>
+			<%= f.label :Privilege%>
+			<div id="role">
+			<div id="previlege" class="previleges roles_0">
+			<%= f.submit "ADD", :onclick => "return privilege_params_check();" %>
+			<%= f.select :modular,options_for_select(Section.all.collect{|x| [	x.name, x.id.to_i]}),{include_blank: '-Select Model-' }, {:id => "privilege_modular",  :onChange => "previlege_add(this);"}%>
+			<%= f.select :modular_id,options_for_select(Modular.all.collect{}), {:id => "privilege_modular_id", :selected =>"", :class=> "test"}, :multiple => "multiple", disabled: true%>		
+    	</div>
+			</div>
+<% end %>
+<div id="grid"></div>

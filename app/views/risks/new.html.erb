@@ -1,0 +1,72 @@
+<div class="page-wrap">
+  <div class="content">
+    <div class="container">
+      <div class="row">
+        <div id="example" class="k-content">
+          <div class="risk-title">Document a New Risk</div>
+
+          <div class="clearfix"> <a class="import-btn" data-toggle="modal" href="#add_url"><i class="download-icons"></i>Import Risk</a>
+            <div id="add_url" class="modal fade">
+              <div class="modal-dialog modal-dialog_large">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &nbsp; </button>
+                    <h4 class="modal-title" id="myModalLabel">Import Risks from CSV/XLSX</h4>
+                       <div class="modal-content-inner">
+                      <%= form_tag risk_imports_risks_path, multipart: true do %>
+                        <%= file_field_tag :file %>
+                        <br>
+                        <div class="model-footer">
+                          <%= submit_tag "Import" ,:class => "black_btn" %>
+                          <%= submit_tag "Cancel" ,:class => "orange_btn" %>
+                        </div>
+                      <% end %>
+                    </div>
+                    <p></p>
+                    <p>
+                      <div  class="grey_btn pop-up-gray">
+                      <%= link_to "Download Sample Risk CSV Template", risk_export_risks_path(format: "csv"), class: "plus-icon plus-icon-sp" %>
+                    </div>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="risk-wrap">
+              <div class="sub-wrap">
+                <div class="sub-titile">Use this form in order to document a new risk for consideration in the Risk Management Process.</div>
+                <div class="sub-wrap-bg">
+                  <%= form_for(@risk) do |f| %>
+                    <%= render 'form', :f => f, :risk => @risk, :departments => @departments, :teams => @teams, :team_users => @team_users, :compliance_libraries => @compliance_libraries %>
+                    <div class="row">
+                      <!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <%#= f.fields_for :attachment do |attach| %>
+                          <%#= attach.label :attachment, t('risk.attachment'), :class => "attach-icon fleft blue_link" %>
+                          <br />
+                          <%#= attach.file_field :attachment_file, :class=>"risk_attachment", onchange: "display_selected_files(this)" %>
+                        <%# end %>
+                        <div class="clearfix" id="selected_files"></div>
+                      </div> -->
+                      <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
+                        <div class="btn-group gr-btn save-file">
+                          <%= f.submit "Save as Draft", :class => "grey_btn"%>
+                          <%= f.submit "File Risk", :class => "orange_btn"%>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+

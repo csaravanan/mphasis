@@ -1,0 +1,103 @@
+<div class="header">
+  <div class="container">
+    <!-- Fixed navbar -->
+    <div role="navigation" class="navbar navbar-inverse ">
+      <div class="container">
+        <div class="navbar-header">
+          <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+          <% unless current_company.attachment.blank? %>
+            <%= link_to image_tag(current_company.attachment.attachment_file, :class => "navbar-brand"), root_path %>
+          <% else %>
+            <div class="company-name">
+              <%= link_to current_company.name, root_path, :class=>"navbar-brand" %>
+            </div>
+          <% end %>
+          </div>
+        <div class="navbar-collapse collapse fleft">
+          <ul class="nav navbar-nav main_nav">
+            <li><a href="/admin/settings" class="<%= add_admin_active_class(params) == 'Settings' ? 'active' : '' %>">
+              <div class="overview-icon"></div>
+              Over view</a></li>
+						<% if company_modules_check('Audit') %>
+							<li><a href="/admin/operational_areas" class="<%= add_admin_active_class(params) == 'Audit' ? 'active' : '' %>">
+								<div class="audit-icon"></div>
+								Audit</a></li>
+						<% end %>
+						<% if company_modules_check('Risk') %>
+							<li><a href="/admin/controls" class="<%= add_admin_active_class(params) == 'Risk' ? 'active' : '' %>">
+								<div class="risk-icon"></div>
+								Risk</a></li>
+						<% end %>
+          </ul>
+        </div>
+				<input type="hidden" id="module" value="<%= add_sub_menu(request.fullpath.split('/')[2])%>">
+        <div class="user_login">
+          <% unless current_user.attachment.blank? || current_user.attachment.attachment_file.blank? %>
+            <%= image_tag(current_user.attachment.attachment_file.small) %>
+          <% else %>
+            <img src="/assets/outer/user-icon.jpg">
+          <% end %>
+          <div class="roll-audit"><%= current_user.role_title.humanize.capitalize %></div>
+          <div class="user-name"><%= current_user.user_name unless current_user.user_name.blank? %></div>
+          <span id="login_drop"><img src="/assets/outer/user-down-arrow.png"></span>
+
+          <div class="account_header_dropdown" style="display: none;">
+            <ul>
+              <li><%= link_to "User Profile", edit_user_path %></li>
+              <li><%= link_to "Audit Trail", activities_path %></li>
+              <li><%= link_to "Reset Password", password_user_path %></li>
+              <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+            </ul>
+          </div>
+        </div>
+        <!--/.nav-collapse -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="sub_menu">
+  <!-- Fixed navbar -->
+  <div role="navigation" class="navbar navbar-inverse subnavbar-fixed-top">
+    <div class="container">
+    <div class="container" id="header_links">
+    </div>
+  </div>
+</div>
+<!-- Notice -->
+  <!--<p class="notice"><%#= notice %></p>
+    <p class="alert"><%#= alert %></p>-->
+<!-- Notice end -->
+
+<script type="text/javascript">
+  $(document).ready(function(){
+		var module = $('#module').val()
+    $( ".user_login" ).mouseenter(function() {
+      $(this).addClass("active");
+      $(".account_header_dropdown").slideDown(100);
+    })
+    .mouseleave(function() {
+      $(this).removeClass("active");
+      $(".account_header_dropdown").hide();
+    });
+
+    $(".next-phase").click(function(){
+      // new Messi('Planned for further phases.', {autoclose: '5000'});
+      new Messi('Planned for further phases.', {title: 'Warning', titleClass: 'warning', autoclose: 2000});
+    });
+	if (module == 'overview')
+		{
+			$("#header_links").append("<%= escape_javascript( render(:partial=>'/layouts/overview_links'))%>");
+		}
+		else if(module == 'risk')
+		{
+			$("#header_links").append("<%= escape_javascript( render(:partial=>'/layouts/risk_links'))%>");
+		}
+		else if(module == 'audit')
+		{
+			$("#header_links").append("<%= escape_javascript( render(:partial=>'/layouts/audit_links'))%>");
+		}
+  });
+</script>

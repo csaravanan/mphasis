@@ -1,0 +1,87 @@
+<script>
+var stage = "<%= params[:stage]%>";
+</script>
+<% content_for :head do %>
+<%= javascript_include_tag '/assets/views/audit_index'%>
+<% end %>
+<div class="page-wrap">
+<div class="clearfix"></div>
+<div class="content">
+  <div class="container">
+    <div class="row">
+      <!-- Nav tabs -->
+      <div class="fright">
+			  <div class="form-group audit_search">
+			    <%= text_field_tag :query, params[:query], :class=>"form-control", :id => "search-value" %>
+			    <%= submit_tag "Search", name: nil, :class=>"btn btn-default", :id => "search-button" %>
+			  </div>
+      </div>
+      <div id="example" class="k-content">
+        <div class="panel-container">
+          <div id="tabstrip">
+            <% unless params[:stage].present? %>
+              <ul>
+                <li class="k-state-active"> All </li>
+                <li> Planned </li>
+                <li> In Progress </li>
+                <li> Published </li>
+              </ul>
+              <div class="row panel-block">
+                <div class="col-md-12">
+                  <div class="box-wrapper">
+                    <div id="gridforall"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix panel-block">
+                 <div class="row panel-block">
+                  <div class="col-md-12">
+                    <div class="box-wrapper">
+                      <div id="gridforplan"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix panel-block">
+                 <div class="clearfix panel-block">
+                 <div class="row panel-block">
+                  <div class="col-md-12">
+                    <div class="box-wrapper">
+                      <div id="gridforprogress"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+              <div class="clearfix panel-block">
+              	<div class="clearfix panel-block">
+                  <div class="row panel-block">
+                    <div class="col-md-12">
+                      <div class="box-wrapper">
+                        <div id="gridforpublish"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+            <% if params[:stage].present? %>
+              <ul>
+                <li class="k-state-active"> All </li>
+              </ul>
+              <div class="row panel-block">
+                <div class="col-md-12">
+                  <div class="box-wrapper">
+                    <div id="gridforstage"></div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>

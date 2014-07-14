@@ -1,0 +1,571 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+en:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            password:
+              too_short:
+                other: "Password should contain minimum of 6 char"
+              too_long:
+                other: "Password should contains maximum of 20 char"
+            password_confirmation:
+              confirmation: "Password Confirmation doesn't match password"
+            email:
+              blank: "Email can't be blank"
+              invalid: "Email is invalid"
+              taken: "Email has been already used"
+              too_long:
+                other: "User email should not contains maximum of 50 char"
+            full_name:
+              blank: "Full Name can't be blank"
+              invalid: "Full Name should contain alphabets"
+              too_short:
+                other: "Full name should contain minimum of 8 char"
+            user_name:
+              blank: "User Name can't be blank"
+              invalid: "User Name should contain only alphabets"
+              too_short:
+                other: "User Name should contain minimum of 8 char"
+              too_long:
+                other: "User name should contains maximum of 52 char"
+              taken: "User name has been already used"
+            role_id:
+              blank: "Role can't be blank"
+        profile:
+          attributes:
+            phone_no:
+              not_a_number: "Please enter a valid phone number"
+              wrong_length:
+                other: "Phone no should be 10 digits"
+            address1:
+              too_long:
+                other: "Address Line 1 cannot exceed 40 characters"
+              too_short:
+                other: "Address Line 1 cannot be less than 7 characters"
+            address2:
+              too_long:
+                other: "Address Line 2 cannot exceed 40 characters"
+              too_short:
+                other: "Address Line 2 cannot be less than 7 characters"
+            city:
+              invalid: "Please enter a valid City.City name should contain alphabets"
+            state:
+              invalid: "Please enter a valid State.State name should contain alphabets"
+        company:
+          attributes:
+            name:
+              blank: "Company Name can't be blank"
+              invalid: "Please enter a valid Company Name.Company Name must be alphanumeric"
+              too_long:
+                other: " Companyname cannot exceed 50 characters"
+              too_short:
+                other: " Companyname cannot be less than 2 characters"
+            address1:
+              too_long:
+                other: "Address Line 1 cannot exceed 40 characters"
+              too_short:
+                other: "Address Line 1 cannot be less than 7 characters"
+            address2:
+              too_long:
+                other: "Address Line 2 cannot exceed 40 characters"
+              too_short:
+                other: "Address Line 2 cannot be less than 7 characters"
+            domain:
+              blank: "Domain name cannot be blank"
+              taken: "Domain name is already taken. Please try another name"
+              invalid: "Domain name should contain alphabets"
+              too_long:
+                other: " Domain name cannot exceed 25 characters"
+              too_short:
+                other: " Domain name cannot be less than 2 characters"
+            secondary_email:
+              invalid: "Secondary Email is invalid"
+              too_long:
+                other: "Email should not contains maximum of 50 char"
+              exclusion: "Primary email and Secondary email should not be same"
+            primary_email:
+              invalid: "Primary Email is invalid"
+              too_long:
+                other: "Email should not contains maximum of 50 char"
+            contact_no:
+              not_a_number: "is not a number"
+              wrong_length:
+                other: "Contact no should be 10 digits"
+        language:
+          attributes:
+            name:
+              blank: "Language cannot be blank"
+              taken: "This language has already been added"
+              invalid: "Language name must be alphabets"
+              too_short:
+                other: "Language should contain minimum of 3 char"
+            code:
+              blank: "Language Code cannot be blank"
+              taken: "Code must be unique"
+              invalid: "Code must be alphabets"
+              wrong_length:
+                other: "Code length should be two characters"
+        client:
+          attributes:
+            name:
+              blank: "Client name can't be blank"
+              invalid: "Client name should be alphanumeric"
+              too_short:
+                other: "client name should contain minimum of 2 char"
+              too_long:
+                other: "client name should not contains maximum of 52 char"
+            contact_no:
+              not_a_number: "is not a number"
+              blank: "Contact number can't be blank"
+              too_long:
+                other: "Contact No cannot exceed 15 digits"
+              too_short:
+                other: "Contact No cannot be less than 10 digits"
+            address1:
+              too_short:
+                other: "Address should contain minimum of 7 char"
+              too_long:
+                other: "Address should contains maximum of 40 char"
+            address2:
+              too_short:
+                other: "Address should contain minimum of 7 char"
+              too_long:
+                other: "Address should contains maximum of 40 char"
+            email:
+              blank: "Email can't be blank"
+              invalid: "Email is invalid"
+              taken: "Email has been already used"
+              too_long:
+                other: "client email should not contains maximum of 50 char"
+        compliance:
+          attributes:
+            name:
+              blank: "Compliance name can't be blank"
+              taken: "Compliance name has been already used"
+              invalid: "Compliance name should contain alphanumeric"
+              too_short:
+                other: "Compliance should contain minimum of 2 char"
+        department:
+          attributes:
+            name:
+              blank: "Department name can't be blank"
+              invalid: "Department name should contain alphanumeric"
+              taken: "Department name has been already used"
+            location_id:
+              blank: "Location Can't be blank"
+        location:
+          attributes:
+            name:
+              blank: "Location name can't be blank"
+              invalid: "Location name should contain alphabets."
+              taken: "Location name has been already used"
+              too_short:
+                other: "Location should contain minimum of 7 char"
+              too_long:
+                other: "Contact number should contains maximum of 10 digits"
+        question_type:
+          attributes:
+            name:
+              blank: "question type  can't be blank"
+              invalid: "question type name should contain alphabets"
+              taken: "question type name has been already used"
+              too_short:
+                other: "Question type should contain minimum of 4 char"
+        role:
+          attributes:
+            title:
+              blank: "Role  can't be blank"
+              invalid: "Role title should be in alphabets"
+              taken: "Role has been already used"
+        team:
+          attributes:
+            name:
+              blank: "Team name can't be blank"
+              invalid: "Team name should contain alphanumeric"
+              taken: "Team name has been already used"
+        priority:
+          attributes:
+            name:
+              blank: "Priority name can't be blank"
+              taken: "Priority name has been already used"
+              invalid: "Priority name should contain alphanumeric"
+        section:
+          attributes:
+            name:
+              blank: "Section name can't be blank"
+              taken: "Section name has been already used"
+              invalid: "Section name should contain alphanumeric"
+              too_short:
+                other: "Section should contain minimum of 4 char"
+        modular:
+          attributes:
+            model_name:
+              blank: "Model name can't be blank"
+              taken: "Model name has been already used"
+              invalid: "Model name should contain alphanumeric"
+              too_short:
+                other: "Model should contain minimum of 4 char"
+            action_name:
+              blank: "Action name can't be blank"
+              taken: "Action name has been already used"
+              invalid: "Action name should contain alphanumeric"
+              too_short:
+                other: "Action should contain minimum of 4 char"
+            section_id:
+              blank: "Section name can't be blank"
+        topic:
+          attributes:
+            name:
+              blank: "Topic can't be blank"
+              taken: "Topic  has been already used"
+              invalid: "Topic should contain alphanumeric"
+              too_short:
+                other: "Location should contain minimum of 4 char"
+        attachment:
+          attributes:
+            attachment_file:
+              size_too_big: "Attachment file size is too big"
+        compliance_library:
+          attributes:
+            name:
+              blank: "Name can't be blank"
+            compliance_id:
+              blank: "Compliance can't be blank"
+        operational_area:
+          attributes:
+            compliance_library_id:
+              taken: "Already Scored! pls update it! "
+            weightage:
+              greater_than_or_equal_to: "Should be greater than or equal to 1"
+              less_than_or_equal_to: "should be less than or equal to 5"
+              only_integer: "Should be an Integer"
+        reminder:
+          attributes:
+            priority_id:
+              taken: "Remainder has been already in set! pls update it! "
+            value:
+              greater_than_or_equal_to: "Should be greater than or equal to 1"
+              less_than_or_equal_to: "Should be less than or equal to 30"
+              only_integer: "Should be an Integer"
+            mail_count:
+              greater_than_or_equal_to: "Should be greater than or equal to 1"
+              less_than_or_equal_to: "should be less than or equal to 30"
+              only_integer: "Should be an Integer"
+        audit:
+          attributes:
+            title:
+              blank: "Title can't be blank"
+              taken: "Title has been already used"
+              too_long:
+                other: "Title must not exceed 50 characters"
+            audit_type_id:
+              blank: "Auditor Type can't be blank"
+            auditor:
+              blank: "Auditor can't be blank"
+            auditees:
+              blank: "Auditee can't be blank"
+              taken: "Please select unique auditee"
+            compliance_type:
+              blank: "Compliance Type can't be blank"
+            standard_id:
+              blank: "Select any one standard"
+            start_date:
+              blank: "Please select start date"
+            end_date:
+              blank: "Please select end date"
+            scope:
+              too_long:
+                other: "Scope must not exceed 250 characters"
+            objective:
+              too_long:
+                other: "Objective must not exceed 250 characters"
+            context:
+              too_long:
+                other: "Context must not exceed 250 characters"
+            methodology:
+              too_long:
+                other: "Methodology must not exceed 250 characters"
+            deliverables:
+              too_long:
+                other: "Deliverables must not exceed 250 characters"
+            issue:
+              too_long:
+                other: "Issue must not exceed 250 characters"
+        nc_question:
+          attributes:
+            question:
+              blank: "Request cannot be blank"
+            target_date:
+              blank: "Date cannot be blank"
+        subscription:
+          attributes:
+            section_ids:
+              blank: "Please select atleast one Section"
+            name:
+              blank: "Name can't be blank"
+              invalid: "Name should contain alphanumeric"
+              taken: "Name has been already used"
+              too_short:
+                other: "Name should contain minimum of 4 char"
+              too_long:
+                other: "Name should not exceed 50 characters"
+            amount:
+              blank: "Amount can't be blank"
+              greater_than_or_equal_to: "Amount should be greater than or equal to 0"
+            valid_log:
+              blank: "Valid log can't be blank"
+              greater_than_or_equal_to: "Should be greater than or equal to 1"
+              less_than_or_equal_to: "should be less than or equal to 500"
+              only_integer: "Should be an Integer"
+            valid_period:
+              blank: "Please select a valid period"
+            user_count:
+              blank: "User Count can't be blank"
+            file_size:
+              blank: "File Size can't be blank"
+        risk:
+          attributes:
+            subject:
+              blank: "Subject cannot be blank"
+            reference:
+              blank: "Reference ID cannot be blank"
+              taken: "Reference ID must be unique"
+            assessment:
+              blank: "Risk Description cannot be blank"
+            compliance_id:
+              blank: "Select a compliance"
+            compliance_library_id:
+              blank: "Select a Control"
+            location_id:
+              blank: "Select a location"
+            category_id:
+              blank: "Select a category"
+            department_id:
+              blank: "Select a department"
+            team_id:
+              blank: "Select a team"
+            owner:
+              blank: "Risk Owner cannot be blank"
+            mitigator:
+              blank: "Mitigator cannot be blank"
+            reviewer:
+              blank: "Reviewer cannot be blank"
+            technology_id:
+              blank: "Technology cannot be blank"
+        risk_scoring:
+          attributes:
+            custom_value:
+              greater_than_or_equal_to: "Custom Value must be in the range of 0 to 10"
+              less_than_or_equal_to: "Custom Value must be in the range of 0 to 10"
+              inclusion: "Custom Value must be in the range of 0 to 10"
+        risk_category:
+          attributes:
+            name:
+              taken: "This category has already been added"
+              blank: "Category cannot be blank"
+        technology:
+          attributes:
+            name:
+              taken: "This technology has already been added"
+              blank: "Technology cannot be blank"
+        cpp_measures:
+          attributes:
+            name:
+              taken: "This Measure has been already used"
+              blank: "Measure cannot be blank"
+              invalid: "Should contain alphabets"
+              too_long: "Measure should be minimum of 250 characters"
+        mitigation:
+          attributes:
+            current_solution:
+              blank: "current Solution can't be blank"
+            security_requirements:
+              blank: "Security Requirements can't be blank"
+            security_recommendations:
+              blank: "Security Recommendations can't be blank"
+        control_measure:
+          attributes:
+            threat:
+              blank: "Threat can't be blank"
+            effectiveness:
+              blank: "Effectiveness can't be blank"
+            consequence:
+              blank: "Consequence can't be blank"
+
+
+
+
+  companies:
+    company:  "Company Name"
+    primary_email: "Primary Email"
+    secondary_email: "Secondary Email"
+    domain: "Sub Domain"
+    address1: "Address Line 1"
+    address2: "Address Line 2"
+    contact: "Contact"
+    country: "Country"
+    timezone: Select Timezone
+
+  modulars:
+    model_name: "Model Name"
+    action_name: "Action Name"
+    section: "Section"
+
+  profile:
+    email: "Email"
+    name: "Name"
+    username: "Username"
+    timezone: "Timezone"
+    language: "Language"
+    Contact: "Contact"
+    address1: "Address 1"
+    address2: "Address 2"
+    city: "City"
+    state: "State"
+    country: "Country"
+    role: "Role"
+    contact: "Contact"
+
+
+  priorities:
+    name: "Name"
+
+  section:
+    name: "Name"
+
+  location:
+    name: "Nameddddd"
+
+  users:
+    username:  "Username"
+    email: "Email"
+
+  system:
+    hello:  "Hello"
+
+  audit:
+    title: "Audit Title"
+    objective: "Objective"
+    deliverables: "Deliverables"
+    context: "Context"
+    issues: "Issues"
+    scope: "Scope"
+    methodology: "Methodology"
+    audit_type: "Audit Type"
+    compliance_type: "Compliance Type"
+    standard : "Standard"
+    topic : "Topic"
+    location : "Location"
+    department : "Department"
+    start_date : "Start Date"
+    end_date : "End Date"
+    auditor : "Auditor"
+    auditee : "Auditee"
+
+  nc_question:
+    request: "Request"
+    resp_type: "Response Type"
+    assign_auditee: "Assign Auditee"
+    target_date: "Target Date"
+    priority: "Priority"
+    need_doc: "Need Document?"
+    save_to_lib: "Save to Request Library"
+
+  checklist_recommendation:
+    recommendation: "Recommendation"
+    response: "Response"
+    closure_date: "Closure Date"
+    priority: "Priority"
+    severity: "severity"
+    score: "Score"
+    comment: "Comment"
+
+  risk:
+    subject: "Subject"
+    reference: "Ref. ID"
+    compliance: "Compliance"
+    control_number: "Control"
+    location: "Location"
+    department: "Department"
+    team: "Team"
+    technology: "Technology"
+    owner: "Risk-Owner"
+    assessment: "Risk Description"
+    notes: "Additional Notes"
+    category: "Category"
+    mitigator: "Mitigator"
+    reviewer: "Reviewer"
+    attachment: "Attach Document"
+
+  dread:
+    damage_potential: "Damage Potential"
+    reproductibility: "Reproductibility"
+    exploitability: "Exploitability"
+    affected_users: "Affected Users"
+    discoverability: "Discoverability"
+
+  owasp:
+    skill_level: "Skill Level"
+    motive: "Motive"
+    opportunity: "Opportunity"
+    size: "Size"
+    ease_of_dis: "Ease of Discovery"
+    ease_of_exp: "Ease of Exploit"
+    awareness: "Awareness"
+    intr_detect: "Intrusion Detection"
+    loss_of_conf: "Loss of Confidentiality"
+    loss_of_inte: "Loss of Integrity"
+    loss_of_avail: "Loss of Availability"
+    loss_of_acc: "Loss of Accountability"
+    fin_damage: "Financial Damage"
+    rep_damage: "Reputation Damage"
+    non_comp: "Non-Compliance"
+    pri_violation: "Privacy Violation"
+
+  cvss:
+    att_vec: "Attack Vector"
+    att_compl: "Attack Complexity"
+    auth: "Authentication"
+    conf_imp: "Confidentiality Impact"
+    int_imp: "Integrity Impact"
+    avail_imp: "Availability Impact"
+    exploi: "Exploitability"
+    remed_level: "Remediation Level"
+    report_conf: "Report Condidence"
+    coll_damage_pot: "Collateral Damage Potential"
+    tar_dist: "Target Distribution"
+    conf_req: "Confidentiality Requirement"
+    int_req: "Integrity Requirement"
+    avail_req: "Availability Requirement"
+
+  risk_scoring:
+    custom: "Custom Value"
+
+  classic:
+    likelihood: "Likelihood"
+    impact: "Impact"
+    vuln: "Vulnerability"
+    velocity: "Velocity"
+
+

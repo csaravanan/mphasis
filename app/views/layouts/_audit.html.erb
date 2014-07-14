@@ -1,0 +1,18 @@
+ <ul class="subbar-nav nav navbar-nav">
+   <li><a href="/admin/compliances" class="<%= request.fullpath.include?("/admin/compliances") == true ? 'active' : '' %>">
+          Compliances</a></li>
+    <li><a href="/admin/modulars" class="<%= request.fullpath.include?("admin/modulars") == true ? 'active' : '' %>">
+          Modulars</a></li>
+        <li><a href="/admin/priorities" class="<%= request.fullpath.include?("admin/priorities") == true ? 'active' : '' %>">
+          Priority</a></li>
+        <li><a href="/admin/question_types" class="<%= request.fullpath.include?("admin/question_types") == true ? 'active' : '' %>">
+          QuestionType</a></li>
+         <li><a href="/admin/sections" class="<%= request.fullpath.include?("admin/sections") == true ? 'active' : '' %>">
+          Section</a></li>
+        <li><a href="/admin/topics" class="<%= request.fullpath.include?("admin/topics") == true ? 'active' : '' %>">
+          Topics</a></li>
+        <li><a href="/admin/scores" class="<%= request.fullpath.include?("admin/scores") == true ? 'active' : '' %>">
+          Score</a></li>
+          <li><a href="/admin/compliance_libraries" class="<%= request.fullpath.include?("admin/compliance_libraries") == true ? 'active' : '' %>">
+          ComplianceLibrary</a></li>
+  </ul>

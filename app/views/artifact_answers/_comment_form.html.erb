@@ -1,0 +1,8 @@
+<%= form_for artifact_answer, url: {action: "update_comment"}, remote: true do |f|%>
+       <%= f.hidden_field :id%>
+        <%= f.fields_for :comment,(artifact_answer.comment || Comment.new) do |builder|%>
+          <%= builder.text_area :comment, cols: 60, rows: 8 %>
+       <%end%>
+        <%= submit_tag "Submit", :class => "black_btn" %>
+        <%= button_tag "Cancel", type: 'button', "data-dismiss" => "modal", :class => "orange_btn" %>
+      <% end %>

@@ -1,0 +1,3 @@
+ <%= form_for(@risk, url: {controller: "mitigations", action: "create"},:method => "post" ,html: {:class =>"form-horizontal", :id => "role"}) do |f| %>
+  <%= render 'form', :risk => @risk, f: f %>
+<% end %>

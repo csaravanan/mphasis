@@ -1,0 +1,80 @@
+<div  class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-7 control-label mgt-label">Access Vector:</label>
+      <div class="col-sm-5 mgt-text"><%= r.risk_scoring.scoring.access_vector_numeric_value if r.risk_scoring.present? %></div>
+    </div>
+  </div>
+  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-7 control-label mgt-label">Access Complexity:</label>
+      <div class="col-sm-5 mgt-text"><%= r.risk_scoring.scoring.access_complexity_numeric_value if r.risk_scoring.present? %></div>
+    </div>
+  </div>
+  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-7 control-label mgt-label">Authentication:</label>
+      <div class="col-sm-5 mgt-text"><%= r.risk_scoring.scoring.authentication_numeric_value if r.risk_scoring.present? %></div>
+    </div>
+  </div>
+  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-7 control-label mgt-label">Confidentiality Impact:</label>
+      <div class="col-sm-5 mgt-text"><%= r.risk_scoring.scoring.conf_impact_numeric_value if r.risk_scoring.present? %></div>
+    </div>
+  </div>
+  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-7 control-label mgt-label">Integrity Impact:</label>
+      <div class="col-sm-5 mgt-text"><%= r.risk_scoring.scoring.integ_impact_numeric_value if r.risk_scoring.present? %></div>
+    </div>
+  </div>
+</div>
+<div  class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-7 control-label mgt-label">Availability Impact:</label>
+      <div class="col-sm-5 mgt-text"><%= r.risk_scoring.scoring.avail_impact_numeric_value if r.risk_scoring.present? %></div>
+    </div>
+  </div>
+  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-7 control-label mgt-label">Exploitability:</label>
+      <div class="col-sm-5 mgt-text"><%= r.risk_scoring.scoring.exploitability_numeric_value if r.risk_scoring.present? %></div>
+    </div>
+  </div>
+  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-7 control-label mgt-label">Report Confidence:</label>
+      <div class="col-sm-5 mgt-text"><%= r.risk_scoring.scoring.report_confidence_numeric_value if r.risk_scoring.present? %></div>
+    </div>
+  </div>
+  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-7 control-label mgt-label">Collateral Damage Potential:</label>
+      <div class="col-sm-5 mgt-text"><%= r.risk_scoring.scoring.collateral_damage_potential_numeric_value if r.risk_scoring.present? %></div>
+    </div>
+  </div>
+  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-7 control-label mgt-label">Target Distribution:</label>
+      <div class="col-sm-5 mgt-text"><%= r.risk_scoring.scoring.target_distribution_numeric_value if r.risk_scoring.present? %></div>
+    </div>
+  </div>
+</div>
+<div  class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+  <div class="row-sp">
+    <div class="form-group">
+      <label for="inputEmail3" class="col-sm-7 control-label mgt-label">Effectiveness :</label>
+        <div class="col-sm-5 mgt-text"><%= r.control_measure.effectiveness if r.control_measure.present? %></div>
+    </div>
+    <div class="form-group" >
+      <label for="inputEmail3" class="col-sm-7 control-label mgt-label ">Threat :</label>
+      <div class="col-sm-5 mgt-text"><%= r.control_measure.threat  if r.control_measure.present?%></div>
+    </div>
+    <div  class="form-group" >
+      <label for="inputEmail3" class="col-sm-7 control-label mgt-label">Consequence :</label>
+      <div class="col-sm-5 mgt-text"><%= r.control_measure.consequence  if r.control_measure.present?%></div>
+    </div>
+  </div>
+</div>

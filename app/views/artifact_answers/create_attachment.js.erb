@@ -1,0 +1,8 @@
+<% if @attachment_error.present? %>
+new Messi("<%=  @attachment_error %>", {title: 'Error', titleClass: 'error', autoclose: 1500});
+<% else %>
+new Messi("<%=  MESSAGES["audit_compliance"]["attachment"]["success"] %>", {title: 'Success', titleClass: 'success', autoclose: 1500});
+$("#file_tag").val('')
+$("#list-file").html("<%= escape_javascript(render 'list_files', attachments: @attachments ) %>")
+ $('#add_file').modal('hide');
+ <% end %>

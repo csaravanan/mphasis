@@ -1,0 +1,97 @@
+<style>
+  .hidden-item{
+    display: none;
+  }
+</style>
+<%= form_for(audit, url: {controller: "nc_questions", action: "create"},:method => "post") do |f| %>
+  <%= f.fields_for :nc_questions do |builder| %>
+    <%#= f.hidden_field :audit_id, value: audit.id %>
+    <%#= f.hidden_field :company_id, value: current_company.id %>
+      <div class="overlay-loader">
+    <div class="ajax-loader-question" style="display:none;">
+      <%= image_tag("/assets/outer/loader-icon.gif", :alt => "ajax-loader") %>
+    </div>
+  </div>
+  	<%= render 'nc_question_fields', audit: audit, f: builder %>
+
+  <% end %>
+  <div id="questions_libraries"></div>
+	<div class="form-group clearfix addissue">
+  	<%= link_to_add_nc_question_fields "Add New Request", f, :nc_questions, audit %>
+  </div>
+
+  <div class="fright clearfix ask-auditee-btn">
+  	<a class="black_btn" href="javascript:goBack()">Back</a>
+    <%= f.submit "Ask Auditee", :class => "orange_btn" %><br /><br />
+  </div>
+<% end %>
+<div class="clearfix"></div>
+  <div class="form-group clearfix addissue"><a class="plus-icon" data-toggle="modal" href="#add_url">Add Request from Library</a><br><br>
+    <div id="add_url" class="modal fade">
+      <div class="modal-dialog modal-dialog_large">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &nbsp; </button>
+            <div class="model-header">
+              <div class="modal-title" id="myModalLabel">Request Library</div>
+            </div>
+            <div class="model-con">
+
+              <div id="test-check">
+                <%= form_tag "/audits/#{audit.id}/nc_questions/library_questions", :id => "submit_library" do %>
+                  <tbody>
+                    <% if library_questions.present? %>
+                      <% library_questions.each do |nc_question| %>
+                        <tr>
+                          <td><%= check_box_tag "nc_questions[]", nc_question.id %></td>
+
+                          <%= nc_question.question %><br>
+                        </tr>
+                      <% end %>
+                      <%= hidden_field_tag :audit_id, audit.id, id: "select_audit" %>
+                    <% end %>
+                  </tbody>
+                  <div class="modal-footer">
+
+                    <%= submit_tag "Add to Current Audit", :type => 'button', href: 'javascript:void(0);', :id=>"submit_questions" ,:class => "black_btn" , :onclick=> "question_submit();"%>
+
+                  </div>
+                <% end %>
+              </div>
+            </div>
+            <div>
+              </br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group clearfix addissue"> <a class="upload-icon" data-toggle="modal" href="#add_files">Upload Requests to Library</a>
+    <div id="add_files" class="modal fade">
+      <div class="modal-dialog modal-dialog_large">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &nbsp; </button>
+            <h4 class="modal-title" id="myModalLabel">Upload files only CSV and XLSX</h4>
+            <div class="model-content">
+            <%= form_tag import_files_audit_nc_questions_path(audit), multipart: true do %>
+              <%= file_field_tag :file , :id =>"file_input"%>
+              <span class="error_message" style="display:none;" id="error_file"><%= MESSAGES["csv_upload"]["presence"]%></span>
+              <br>
+              <div class="model-footer">
+                <%= submit_tag "Import" ,:class => "black_btn" , :onclick => "return file_presence_check();" %>
+                <%= button_tag "Cancel", type: 'button', "data-dismiss" => "modal", :class => "orange_btn" %>
+              </div>
+            <% end %>
+          </div>
+            <p></p>
+            <p>
+              <%= link_to "Download Sample Non Compliance Checklist CSV", export_files_audit_nc_questions_path(audit_id: audit.id, format: "csv"), :class =>'download-file-icon' %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+

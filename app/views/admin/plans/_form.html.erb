@@ -1,0 +1,44 @@
+<div id="main_content_wrapper">
+  <div id="main_content">
+    <%= active_admin_form_for [:admin, @plan] do |f| %>
+      <fieldset class="inputs">
+        <legend>
+          <span>Plan</span>
+        </legend>
+        <ol>
+          <li id="plan_company_id_input" class=" input">
+              <%= f.input :company, :input_html => { :value => "#{@plan.company.name}",disabled: true}%>
+          </li>
+          <li id="plan_subscription_id_input" class="string input required stringish">
+            <%= f.input :subscription_id, as: :select, :collection=>Subscription.all{|x| [x.name,x.id]} %>
+          </li>
+          <li id="plan_amount_input" class=" input">
+            <%= f.input :amount,  :input_html => { :value => "#{@plan.subscription.amount}",disabled: true}%>
+          </li>
+          <li id="plan_starts_input" class=" input optional">
+            <%= f.label "Starts", :class=>"label"%>
+              <%=  "#{@plan.starts.to_date.strftime("%d, %B %Y")}" %>
+      
+          </li>
+          <li id="plan_expires_input" class=" input optional">
+              <%= f.label "Expires", :class=>"label"%>
+              <%=  "#{@plan.expires.to_date.strftime("%d, %B %Y")}" %>
+      
+          </li>
+        </ol>
+      </fieldset>
+      <fieldset class="actions">
+        <ol>
+          <%submit_val = (@plan.expires.to_date < Date.today) ? "Renewal" : "Upgrade"%>
+          <li id="plan_submit_action" class="action input_action ">
+            <input type="submit" value= <%= submit_val%> name="commit">
+          </li>
+          <li class="cancel">
+            <a href="/admin/plans">Cancel</a>
+          </li>
+        </ol>
+      </fieldset>
+    </form>
+    <% end %>
+      </div>
+</div>

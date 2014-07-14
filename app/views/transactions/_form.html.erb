@@ -1,0 +1,56 @@
+<%if @credit_card.present? && @credit_card.errors.present? %>
+<div class="container">
+    <div class="col-md-4 col-md-offset-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+           <div id="error_explanation">
+            <h2> Error Messages </h2>
+            <ul>
+              <% @credit_card.errors.full_messages.each do |message|%>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+           </div>
+        </div>
+      </div>
+    </div>
+</div>
+<%end%>
+<%= form_for @transaction do |f| %>
+<%if @trans_param.present? %>
+<%params[:subscription]= @trans_param[:transaction][:subscription] %>
+<%params[:company]= @trans_param[:transaction][:company_domain] %>
+<%end%>
+<%= f.hidden_field "company_domain",:value=>params[:company]%>
+<%= f.hidden_field "subscription",:value=>params[:subscription]%>
+
+<%= fields_for(:credit_card, @credit_card) do |cc| %>
+  <p>
+   <label>First Name</label><br />
+    <%= cc.text_field :first_name %>
+  </p>
+  <p>
+    <label>Last Name</label><br />
+    <%= cc.text_field :last_name %>
+  </p>
+  <p>
+   <label>Card Type</label><br />
+    <%= cc.select :brand, [["Visa", "visa"], ["MasterCard", "master"], ["Discover", "discover"], ["American Express", "american_express"]] %>
+  </p>
+  <p>
+   <label>Card Number</label><br />
+    <%= cc.text_field :number %>
+  </p>
+  <p>
+   <label>Card Verification Value (CVV)</label><br />
+    <%= cc.text_field :verification_value %>
+  </p>
+  <p>
+    <label>Card Expires On</label><br />
+  <%= cc.select :month, (1..12) %>
+  <%= cc.select :year, (Time.now.year .. 10.years.from_now.year) %>
+  </p>
+  <% end %>
+  <p><%= f.submit "Submit" %></p>
+<% end %>
+<p><%= button_to "Cancel",new_user_session_path,method: :get %></p>

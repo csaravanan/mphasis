@@ -1,0 +1,103 @@
+<div class="col-lg-4">
+	<div class="form-group clearfix">
+	<% if question.question_type_name == "Yes or No"%>
+		<div class="form-group clearfix">
+		<label class="col-sm-5">Your Choice</label>
+			<div class="col-sm-7">
+				<input type="radio" value="0" name="answer[<%= question.id %>][value]" class="answer_check" <%= 'checked' if question.answer.value == 0 %>>
+				<label for="value_Yes">Yes</label>
+				<input type="radio" value="1" name="answer[<%= question.id %>][value]" class="answer_check" <%= 'checked' if question.answer.value == 1 %>>
+				<label for="value_No">No</label>
+				<br>
+				<input type="hidden" value="<%= question.id %>" name="audit_id" id="answer_<%= question.id %>">
+				<span class="error_message" id="answer_check_<%= question.id %>" style="display:none;"><%= MESSAGES["answers"]["detailed_value"]%><span>
+			</div>
+			<br>
+			<div class="form-group clearfix">
+				<% if question.does_require_document? %>
+					<div class="col-sm-12"><a class="attach-icon fleft blue_link" href="#" onclick="$('#answer_document_<%= question.id %>').click();" >Attach Document</a>
+						<%= file_field_tag "answer[#{question.id}][attachment]", :style => "visibility:hidden; display:none;",  :id => "answer_document_#{question.id}", onchange: "display_selected_files(this)"%></br>
+					<div class="clearfix" id="selected_files"></div>
+					</div>
+					<div class="col-sm-12">
+					<% attachment = question.answer.attachment %>
+					<% if attachment.present? %>
+						<%= "<h4>Attachments</h4>".html_safe if attachment.present?%>
+						<div id="attach_<%= attachment.id%>"><%= link_to (File.basename(attachment.attachment_file_url.to_s)).truncate(20), download_artifacts_audit_checklist_recommendations_path(audit_id: audit.id, id: attachment.id), class: "blue_link"%>
+							<%unless(audit.audit_status_id == audit_status)%>
+							<div class="addissue" style="float: right;"> <%= link_to "remove", remove_attachment_artifact_answers_path(audit_id: audit.id, id: attachment.id ), data: { confirm: "Are you sure?" }, method: :delete, remote: true, class: "minus-icon"%></div>
+							<%end%>
+						</div>
+					<%end%>
+					</div>
+				<% end %>
+			</div>
+		</div>
+
+	<% elsif question.question_type_name == "Descriptive Type" %>
+		<div class="form-group clearfix">
+			<label class="col-sm-5">Your Answer</label>
+			<div class="col-sm-7">
+				<textarea name="answer[<%= question.id %>][detailed_value]" id="detailed_value_<%= question.id %>" class="audit-big-input nc_question_answer" ><%= question.answer.detailed_value if question.answer.present?%></textarea>
+				<span class="error_message" id="error_detailed_value_<%= question.id%>" style="display:none;"><%= MESSAGES["answers"]["detailed_value"]%><span>
+			</div>
+		<br>
+			<div class="form-group clearfix">
+				<% if question.does_require_document? %>
+					<div class="col-sm-12"><a class="attach-icon fleft blue_link" href="#" onclick="$('#answer_document_<%= question.id %>').click();" >Attach Document</a>
+						<%= file_field_tag "answer[#{question.id}][attachment]", :style => "visibility:hidden; display:none;",  :id => "answer_document_#{question.id}", onchange: "display_selected_files(this)"%></br>
+							<div class="clearfix" id="selected_files"></div>
+							<div class="col-sm-12">
+								<% if question.answer.attachment.present? %>
+									<% attachment = question.answer.attachment %>
+									<%= "<h4>Attachments</h4>".html_safe if attachment.present?%>
+									<div id="attach_<%= attachment.id%>"><%= (link_to (File.basename(attachment.attachment_file_url)).truncate(20), artifacts_download_audits_path(id: attachment.id), class: "blue_link") if attachment.attachment_file_url  %>
+										<%unless(audit.audit_status_id == audit_status)%>
+										<div class="addissue" style="float: right;"> <%= link_to "remove", remove_attachment_audit_checklist_recommendations_path(id: attachment.id ), data: { confirm: "Are you sure?" }, method: :delete, remote: true, class: "minus-icon"%></div>
+										<%end%>
+									</div>
+								<%end%>
+							</div>
+					</div>
+				<% end %>
+			</div>
+		</div>
+	<% elsif question.question_type_name == "Multiple Choice" %>
+		<div class="form-group clearfix">
+			<label class="col-sm-5">Your Option</label>
+			<div class="col-sm-7">
+			<% question_options = question.question_options %>
+				<% question_options.each do |question_option|%>
+					<input type="radio" value="<%= question_option.id%>" name="answer[<%= question.id %>][value]" id="value_<%= question_option.id%>"
+					<%= 'checked' if(!question.answer.question_option.nil? && question.answer.question_option.value == question_option.value) %>
+					<label for="value_<%= question_option.id%>"><%= question_option.value%></label> <br>
+				<% end %>
+				<br>
+				<input type="hidden" value="<%= question.id %>" name="audit_id" id="answer_<%= question.id %>">
+				<span class="error_message" id="answer_check_<%= question.id %>" style="display:none;"><%= MESSAGES["answers"]["detailed_value"]%><span>
+				<br>
+			</div>
+			<br>
+			<div class="form-group clearfix">
+				<% if question.does_require_document? %>
+				<div class="col-sm-12"><a class="attach-icon fleft blue_link" href="#" onclick="$('#answer_document_<%= question.id %>').click();" >Attach Document</a>
+						<%= file_field_tag "answer[#{question.id}][attachment]", :style => "visibility:hidden; display:none;",  :id => "answer_document_#{question.id}", onchange: "display_selected_files(this)"%></br>
+							<div class="clearfix" id="selected_files"></div>
+							<div class="col-sm-12">
+								<% if question.answer.attachment.present? %>
+									<% attachment = question.answer.attachment %>
+									<%= "<h4>Attachments</h4>".html_safe if attachment.present?%>
+									<div id="attach_<%= attachment.id%>"><%= (link_to (File.basename(attachment.attachment_file_url)).truncate(20), artifacts_download_audits_path(id: attachment.id), class: "blue_link") if attachment.attachment_file_url  %>
+										<%unless(audit.audit_status_id == audit_status)%>
+										<div class="addissue" style="float: right;"> <%= link_to "remove", remove_attachment_audit_checklist_recommendations_path(id: attachment.id ), data: { confirm: "Are you sure?" }, method: :delete, remote: true, class: "minus-icon"%></div>
+										<%end%>
+									</div>
+								<%end%>
+							</div>
+					</div>
+				<% end %>
+			</div>
+		</div>
+	<% end %>
+	</div>
+</div>

@@ -1,0 +1,140 @@
+
+<div id="Accordion1">
+ <% audit.answered_compliances.each do |audit_compliance| %>
+   <% checklist_recommendation = audit_compliance.checklist_recommendation%>
+  <h3><a href="#"><%= audit_compliance.compliance_library_name%></a> <span class="fright pending_msg" id= "recommendation_status_<%= audit_compliance.id%>">
+				<% closed_id, closed_duplicate_id, risk_accepted = recommendation_status%>
+    <% status = (checklist_recommendation.present? ? checklist_recommendation.recommendation_status_id : nil)%>
+    <% closed_id, closed_duplicate_id, risk_accepted = recommendation_status %>
+      <%= (status == closed_id || status == closed_duplicate_id || status == risk_accepted) ? 'Completed' : 'Pending' %></span></h3>
+      <div>
+
+      <!-- Hidden Value !-->
+      <%= f.hidden_field :checklist_id, :name => "checklist_recommendation[#{audit_compliance.id}][checklist_id]", :id => "checklist_id_#{audit_compliance.id}", :value => audit_compliance.id%>
+      <%= f.hidden_field :checklist_type, :name => "checklist_recommendation[#{audit_compliance.id}][checklist_type]", :id => "checklist_type_#{audit_compliance.id}", :value => "AuditCompliance"%>
+
+
+      <div class="row audit-title">
+        <div class="col-lg-4">
+          <% artifact_answers = audit_compliance.artifact_answers.first%>
+          <div class="form-group clearfix">
+            <label class="col-sm-5"><b>Artifact :</b></label>
+              <div class="col-sm-7">
+                <a class="blue_link" href="javascript:artifact_modal(<%= audit_compliance.id%>);"><%= artifact_answers.artifact_display_name if artifact_answers%></a></div>
+              <% if audit_compliance.artifact_answers.count > 1%>
+                 <div class="col-sm-12"><a class="blue_link pull-right" href = "javascript:artifact_modal(<%= audit_compliance.id%>);" >more</a></div>
+              <%end%>
+          </div>
+
+           <div class="form-group clearfix">
+                <%= f.label :recommendation, t(' checklist_recommendation.recommendation'), :class => "col-sm-5 control-label" %>
+                <!--   <label  class="col-sm-5"><b>Recommendation :</b><br></label> -->
+                    <div class="col-sm-7">
+                      <%= f.text_area :recommendation, :name => "checklist_recommendation[#{audit_compliance.id}][recommendation]", :id => "recommendation_#{audit_compliance.id}", :class => "audit-big-input control_recommendation", :value => "#{checklist_recommendation.recommendation if checklist_recommendation.present?}"  %>
+                      <span class="error_message" id="error_recommendation_<%= audit_compliance.id%>" style="display:none;"><%= MESSAGES["checklist_recommendations"]["recommendation"]%><span>
+                      <!--  <input class="audit-big-input" type="text"> -->
+                      <%if @checklist_recommendation.errors[:recommendation].present?%>
+                        <div class="error_message"><%=  checklist_recommendation.errors[:recommendation][0]%></div>
+                      <% end %>
+                    </div>
+              </div>
+              <div class="form-group clearfix">
+                <%= f.label :Priority, t(' checklist_recommendation.priority'), :class => "col-sm-5 control-label" %>
+                <!--   <label  class="col-sm-5"><b>Priority :</b> </label> -->
+                  <div class="col-sm-7">
+                      <%= f.collection_select :recommendation_priority_id, Priority.all, :id, :name, checklist_recommendation.present? ? {selected: checklist_recommendation.recommendation_priority_id} : {},{ :name => "checklist_recommendation[#{audit_compliance.id}][recommendation_priority_id]", :id => "recommendation_priority_id_#{audit_compliance.id}", :class=> "control_priority"} %>
+
+                  <span class="error_message" id="error_recommendation_<%= audit_compliance.id%>" style="display:none;"><%= MESSAGES["checklist_recommendations"]["priority"]%><span>
+                  </div>
+              </div>
+       </div>
+
+          <div class="col-lg-4">
+            <div class="form-group clearfix">
+              <%= f.label :Comment, t(' checklist_recommendation.comment'), :class => "col-sm-5 control-label" %>
+                <!--   <label class="col-sm-5"><b>Comment :</b> </label> -->
+                <div class="col-sm-7"><%= artifact_answers.comment_comment.truncate(50) if artifact_answers && artifact_answers.comment_comment%></div>
+
+            </div>
+              <div class="form-group clearfix">
+                <%= f.label :Reason, t(' checklist_recommendation.reason'), :class => "col-sm-5 control-label" %>
+                           <!--    <label  class="col-sm-5"><b>Reason :</b> </label> -->
+                  <div class="col-sm-7">
+                    <%= f.text_area :reason, :class => "audit-big-input control_reason", :name => "checklist_recommendation[#{audit_compliance.id}][reason]", :id => "reason_#{audit_compliance.id}", :value => "#{checklist_recommendation.reason if checklist_recommendation.present?}" %>
+                             <!--    <input class="audit-big-input" type="text"> -->
+                    <span class="error_message" id="error_reason_<%= audit_compliance.id%>" style="display:none;"><%= MESSAGES["checklist_recommendations"]["reason"]%><span>
+                  </div>
+              </div>
+              <div class="form-group clearfix">
+                 <%= f.label :Severity, t(' checklist_recommendation.severity'), :class => "col-sm-5 control-label" %>
+                            <!--   <label  class="col-sm-5"><b>Severity :</b> </label> -->
+                    <div class="col-sm-7">
+                      <%= f.collection_select :recommendation_severity_id, Priority.all, :id, :name, checklist_recommendation.present? ? {selected: checklist_recommendation.recommendation_severity_id} : {}, {:name => "checklist_recommendation[#{audit_compliance.id}][recommendation_severity_id]", :id => "recommendation_severity_id_#{audit_compliance.id}", :class=> "control_severity"}%>
+
+                <span class="error_message" id="error_severity_<%= audit_compliance.id%>" style="display:none;"><%= MESSAGES["checklist_recommendations"]["severity"]%><span>
+                    </div>
+              </div>
+              </div>
+
+              <div class="col-lg-4">
+                <div class="form-group clearfix">
+                  <%= f.label :'Closure Date', t(' checklist_recommendation.closure_date'), :class => "col-sm-5 control-label" %>
+                             <!--  <label class="col-sm-5"><b>Target Date :</b> </label> -->
+                    <div class="col-sm-7">
+                      <%= f.text_field :closure_date, :class => "datepicker2 control_closure_date", :style =>"width:150px;", :name => "checklist_recommendation[#{audit_compliance.id}][closure_date]", :id => "closure_date_#{audit_compliance.id}", :value => "#{checklist_recommendation.closure_date.to_date.strftime("%d/%m/%Y") if checklist_recommendation.present? rescue ""}", :readonly => 'readonly' %>
+                              <!--   <input id="datepicker2" value="10/10/2011" style="width:150px;" /> -->
+                  <span class="error_message" id="error_closure_date_<%= audit_compliance.id%>" style="display:none;"><%= MESSAGES["checklist_recommendations"]["closuredate"]%><span>
+                    </div>
+                  </div>
+              <div class="form-group clearfix">
+                <%= f.label :Status, t(' checklist_recommendation.status'), :class => "col-sm-5 control-label" %>
+                            <!--   <label  class="col-sm-5"><b>Status :</b> </label> -->
+                   <div class="col-sm-7">
+                  <%= f.collection_select :recommendation_status_id, RecommendationStatus.all, :id, :name, checklist_recommendation.present? ? {selected: checklist_recommendation.recommendation_status_id} : {},{ :name => "checklist_recommendation[#{audit_compliance.id}][recommendation_status_id]", :id => "recommendation_status_id_#{audit_compliance.id}", :class=> "control_status"} %>
+                   </div>
+                      <span class="error_message" id="error_status_<%= audit_compliance.id%>" style="display:none;"><%= MESSAGES["checklist_recommendations"]["status"]%><span>
+                      </div>
+              <div class="form-group clearfix">
+                <%= f.label :Score, t(' checklist_recommendation.score'), :class => "col-sm-5 control-label" %>
+                             <!--  <label  class="col-sm-5"><b>Score :</b> </label> -->
+
+                      <div class="col-sm-7">
+                      <div class="number_link">
+                      <!--<input type="hidden" id="score_#{control.id}" name="checklist_recommendation[#{control.id}][score]" value="0" />-->
+                      <%= hidden_field_tag "checklist_recommendation[#{audit_compliance.id}][score]",  (audit_compliance.score_id ? audit_compliance.score_id : 1) , :id => "score_#{audit_compliance.id}"%>
+                      <% score_id = (audit_compliance.score_id.present? ?  audit_compliance.score_id : nil) %>
+                      <% score.each_with_index do |score, index|%>
+                         <%if score_id%>
+                         <a class="score_points <%= (score_id == score.id)  ?  'active' : ''%>" id="<%= audit_compliance.id%>_<%= score.id %>" href="javascript:void(0)" data-value="<%= score.id %>"><%= score.level%></a>
+                         <%else%>
+                         <a class="score_points  <%= (index==0) ? 'active' : ''%>" id="<%= audit_compliance.id%>_<%= score.id %>" href="javascript:void(0)" data-value="<%= score.id %>"><%= score.level%></a>
+                        <%end%>
+                      <%end%>
+                      </div>
+                      </div>
+                    </div>
+              <div class="form-group clearfix">
+                <div class="col-sm-12 ">
+                   <!-- a class="black_btn fright" href=""> Score</a-->
+                  <%unless(audit.audit_status_id == 4)%>
+                    <%=button_tag "Score", :class => "black_btn fright", type: 'button', onclick: "save_individual_score(#{audit_compliance.id})",:disabled => (checklist_recommendation && checklist_recommendation.recommendation_status_id == 3)%>
+                  <%end%>
+                </div>
+
+              </div>
+         </div>
+
+         </div>
+        </div>
+        <% end %>
+        </div>
+
+
+<!-- Model for more Artifact  and comments -->
+<div class="modal fade" id="artifact_modal">
+  <div class="modal-dialog modal-dialog_large">
+    <div class="modal-content">
+
+    </div>
+  </div>
+</div>

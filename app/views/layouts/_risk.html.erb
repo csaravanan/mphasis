@@ -1,0 +1,16 @@
+
+
+  <ul class="subbar-nav nav navbar-nav">
+        <li><a href="/admin/planning_strategies" class="<%= request.fullpath.include?("admin/planning_strategies") == true ? 'active' : '' %>">
+          PlanningStrategy</a></li>
+          <li><a href="/admin/reviews" class="<%= request.fullpath.include?("admin/reviews") == true ? 'active' : '' %>">
+          Review</a></li>
+           <li><a href="/admin/next_steps" class="<%= request.fullpath.include?("admin/next_steps") == true ? 'active' : '' %>">
+          NextStep</a></li>
+           <li><a href="/admin/risk_approval_statuses" class="<%= request.fullpath.include?("admin/risk_approval_statuses") == true ? 'active' : '' %>">
+          RiskApprovalstatus</a></li>
+           <li><a href="/admin/implementation_statuses" class="<%= request.fullpath.include?("admin/implementation_statuses") == true ? 'active' : '' %>">
+          ImplementationStatus</a></li>
+          <li><a href="/admin/close_reasons" class="<%= request.fullpath.include?("admin/close_reasons") == true ? 'active' : '' %>">
+          CloseReason</a></li>
+      </ul>

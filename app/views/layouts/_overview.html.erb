@@ -1,0 +1,10 @@
+  <ul class="subbar-nav nav navbar-nav">
+        <li><a href="/admin/dashboard" class="<%= request.fullpath.include?("admin/dashboard") == true ? 'active' : '' %>">
+          Dashboard</a></li>
+        <li><a href="/admin/companies" class="<%= request.fullpath.include?("admin/companies") == true ? 'active' : '' %>">
+          Companies</a></li>
+        <li><a href="/admin/languages" class="<%= request.fullpath.include?("admin/languages") == true ? 'active' : '' %>">
+          Language</a></li>
+				 <li><a href="/admin/subscriptions" class="<%= request.fullpath.include?("admin/subscriptions") == true ? 'active' : '' %>">
+					Subscription</a></li>
+        </ul>

@@ -1,0 +1,113 @@
+ar:
+
+  location:
+    create:
+      success: "تم إنشاء الموقع بنجاح"
+      update: "تم تحديث الموقع بنجاح"
+      destroy: "تم تدمير الموقع بنجاح"
+
+
+  client:
+    create:
+      success: "تم إنشاء العميل بنجاح."
+      update: "تم تحديث العميل بنجاح."
+      destroy: "دمر العميل بنجاح."
+
+  Team:
+    create:
+      success: "تم إنشاء فريق بنجاح."
+      update: "تم تحديث فريق بنجاح."
+      destroy: "دمر فريق بنجاح."
+
+  Department:
+    create:
+      success: "تم إنشاء قسم بنجاح."
+      update: "تم تحديث قسم بنجاح."
+      destroy: "تم تدمير قسم بنجاح."
+
+  User:
+    create:
+      success: "تم إنشاء المستخدم بنجاح."
+      update: "تم تحديث المستخدم بنجاح."
+      destroy: "دمر المستخدم بنجاح."
+
+  Role:
+    create:
+      success: "تم إنشاء الدور بنجاح"
+
+  checklist_recommendation:
+    auditee_create:
+      success: "تم إنشاء استجابة الخاضعة للتدقيق بنجاح"
+    audit_observation:
+      success: "تم إنشاء الملاحظة التدقيق بنجاح"
+    audit_recommendation:
+      success: "تم إنشاء توصية التدقيق بنجاح"
+
+  audit_compliance:
+    comment:
+      success: "استجابة النص حفظ بنجاح"
+
+  # company:
+  #   domain:
+  #       unique: "آسف، لقد تم بالفعل اتخاذ هذا المجال."
+
+  section:
+    create:
+      success: "تم إنشاء القسم بنجاح."
+      update: "تم تحديث القسم بنجاح."
+      destroy: "تم تدمير القسم بنجاح."
+      create: "تم إنشاء القسم بنجاح."
+      failure: ""
+
+  priorities:
+    create:
+      success: "تم إنشاء القسم بنجاح."
+      update: "تم تحديث القسم بنجاح."
+      destroy: "تم تدمير القسم بنجاح."
+      create: "تم إنشاء القسم بنجاح."
+      failure: ""
+
+  modulars:
+    create:
+      success: "تم إنشاء القسم بنجاح."
+      update: "تم تحديث القسم بنجاح."
+      destroy: "تم تدمير القسم بنجاح."
+      create: "تم إنشاء القسم بنجاح."
+      failure: ""
+
+  previlages:
+    create:
+      success: "تم إنشاء إمتياز، بنجاح."
+      failure: "وأضاف بعض الامتيازات بالفعل."
+      action: "الرجاء اختيار العمل لخلق امتياز."
+
+  checklist:
+    create:
+      success: "تم إنشاء قائمة بنجاح"
+      failure: "يرجى تحديد أي مجال"
+
+  roles:
+    company_admin_failure: "لا يمكنك إنشاء دور مع هذا اللقب"
+
+  audit:
+    failure:
+      auditee_blank: "الرجاء اختيار الخاضعة للتدقيق"
+      auditee_unique: "الرجاء اختيار الخاضعة فريدة من نوعها"
+      start_date_before_end_date: "يجب ألا يكون تاريخ انتهاء قبل تاريخ بدء"
+      auditor_not_in_auditees: "يتم تحديد المستخدم بالفعل كمراجع"
+
+  checklist_recommendations:
+    recommendation: "من فضلك ادخل توصية"
+    priority: "يرجى تحديد الأولوية"
+    reason: "من فضلك ادخل السبب"
+    severity: "الرجاء اختيار شدة"
+    closuredate: "الرجاء اختيار تاريخ الإغلاق"
+    status: "الرجاء اختيار تاريخ الإغلاق"
+    corrective: "الرجاء اختيار الوضع"
+    preventive: "الرجاء إدخال التصحيحية"
+    observation: "من فضلك ادخل الوقائية"
+    is_implemented: "الرجاء إدخال المراقبة"
+    remarks: "يرجى تحديد حالة تنفيذ"
+
+  answers:
+    detailed_value: "الرجاء إدخال الملاحظات"

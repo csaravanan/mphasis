@@ -1,0 +1,23 @@
+<%= f.fields_for :risk_scoring, (f.object.risk_scoring.present? ? f.object.risk_scoring : RiskScoring.new) do |custom| %>
+  <div class="row custom_scoring" style='<%= "display:block" if risk_scoring_type_custom(risk) %>'>
+    <div class="likelihood matrix-padding clearfix">
+      <div class="base-score-matrix">Custom Score
+        <div class="up-triangle"></div>
+      </div>
+      <div class="">
+        <div class="exploitability">Please enter a value(Must be a numeric value between 0 to 10)</div>
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <div class="form-group">
+              <div class="col-sm-12">
+                <%= custom.label :custom_value, t('risk_scoring.custom') %>
+                <%= custom.text_field :custom_value, :class => "form-control risk-normal-input" %>
+              </div>
+              <% if custom.object.errors[:custom_value].present? %>
+                <div class="error_message"><%= custom.object.errors[:custom_value][0]%></div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+<% end %>

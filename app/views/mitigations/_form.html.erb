@@ -1,0 +1,351 @@
+ <%= javascript_include_tag '/assets/bootstrap-multiselect'%>
+ <%= stylesheet_link_tag  '/assets/bootstrap-multiselect', media: 'all' %>
+  <div class="clearfix"></div>
+
+  <div class="clearfix"></div>
+   <div class="page-wrap">
+  <div class="content">
+    <div class="container">
+      <div>
+        <!-- Nav tabs
+         <div class="risk-title">Risk Mitigation</div>
+         </div>
+         </div>
+         <!------------Risk box ---------->
+         <div class="container">
+         <div>
+          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+            <div class="mitigation-box-wrap">
+              <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <% if risk.risk_scoring.present? %>
+                  <% value = risk.risk_scoring.calculated_risk.present? ? risk.risk_scoring.calculated_risk : risk.risk_scoring.custom_value %>
+                  <% if value <= 4 %>
+                    <div class="grey-box">
+                      <div class="number"><%= value %></div>
+                      <div class="text">Low</div>
+                    </div>
+                  <% elsif value <= 7 && value > 4 %>
+                    <div class="yellow-box">
+                      <div class="number"><%= value %></div>
+                      <div class="text">Medium</div>
+                    </div>
+                  <% else %>
+                    <div class="red-box">
+                      <div class="number"><%= value %></div>
+                      <div class="text">High</div>
+                    </div>
+                  <% end %>
+                <% end %>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 ">
+                    <div class="mitigate-inner mitigate-box">
+                        <div class="risk-box-lable">Risk Id :</div>
+                        <div class="risk-box-text"><%= risk.id if risk.present? %></div>
+                    </div>
+                </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+             <div class="mitigation-box-wrap">
+              <div class="mitigation-sub">
+                  <div class="risk-box-lable">Subject:</div>
+                    <div class="risk-box-text"><%= risk.subject if risk.present? %></div>
+                </div>
+                </div>
+            </div>
+             <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+            <div class="mitigation-box-wrap">
+              <div class="mitigation-status">
+                  <div class="risk-box-lable">Status:</div>
+                    <div class="risk-box-text"><%= risk.risk_status.name if risk.present? %></div>
+                </div>
+                </div>
+            </div>
+         </div>
+
+         <div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+               <div class="tab-pane active" id="all">
+            <div class="table-responsive">
+              <table class="table table-striped table-bg">
+                <tr>
+                  <th colspan="6" class="risk-able-th"><%= risk.subject if risk.present? %></th>
+                </tr>
+                <tr>
+                  <td><label>Control Number : </label>
+                   <%= risk.compliance_library_id  if risk.present? %></td>
+                  <td><label> Reference Id : </label>
+                    <%= risk.reference if risk.present? %></td>
+                  <td><label>Site / Location : </label>
+                    <%= risk.location.name if risk.present? %></td>
+                </tr>
+                <tr>
+                  <td><label>Category : </label>
+                    <%= risk.risk_category_name if risk.present? %></td>
+                  <td><label>Technology : </label>
+                    <%= risk.technology.name if risk.present? %></td>
+                  <td><label>Owner :</label>
+                    <%= risk.risk_owner_user_name if risk.present?%></td>
+                </tr>
+                <tr>
+                  <td><label>Ownerâs Manager: </label>
+                    <%= risk.risk_owner_user_name if risk.present? %></td>
+                  <td><label>Team : </label>
+                    <%= risk.team.name if risk.present? %></td>
+                  <td><label> Scoring Method :</label>
+                    <%= risk.risk_scoring_scoring_type if risk.present? %></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+            </div>
+         </div>
+         <!---------------Table 2 -------->
+         <div>
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="risk-assetes">
+              <div class="mitigation-recomm">
+                <div class="mit-reccom-title">Risk Assesment</div>
+                <p><%= risk.assessment %></p>
+                </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+              <div class="mitigation-recomm">
+                <div class="mit-reccom-title">Additional Note</div>
+                <p><%= risk.notes %></p>
+                </div>
+            </div>
+         </div>
+          <!---------------form 1 -------->
+         <div>
+           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="mit-plan-effort">
+              <div class="mitigation-percive">
+                <div class="mit-reccom-title-sp">Plan Effort</div>
+                <div class="risk-wrap clearfix">
+                <div class="sub-wrap-bg">
+                  <div  class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+              <!--Row first ------------>
+                       <%= f.fields_for :control_measure do |control| %>
+                   <!--Row first ------------>
+               <div>
+                 <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 ">
+                     <div class="form-group clearfix">
+                        <label for="inputEmail3" class="col-sm-4 control-label">Control</label>
+                       <div class="col-sm-8">
+                            <!--div class="risk-select"-->
+                            <div>
+                             <%= control.collection_select  :control_ids, CppMeasure.for_name("Control"), :id, :name,{}, {class: 'multiselect',:multiple => "multiple"} %>
+                             <%#= select("control", "control_ids", options_from_collection_for_select(@controls, :id, :name), {}, {:id=> "multiselect", :multipart =>"multiple" }) %>
+                            </div>
+                    </div>
+                   </div>
+                  </div>
+                  </div>
+
+                 <!--Row first ------------>
+                <div>
+                 <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 ">
+                     <div class="form-group clearfix">
+                        <label for="inputEmail3" class="col-sm-4 control-label">Process</label>
+                       <div class="col-sm-8">
+                            <!--div class="risk-select"-->
+                            <div>
+                             <%= control.collection_select(:process_ids, CppMeasure.for_name("Process"),  :id, :name,{}, {class: 'multiselect',:multiple => "multiple"}) %>
+                            </div>
+                    </div>
+                   </div>
+                  </div>
+                  </div>
+                 <!--Row first ------------>
+                <div>
+                 <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 ">
+                     <div class="form-group clearfix">
+                        <label for="inputEmail3" class="col-sm-4 control-label">Procedure</label>
+                       <div class="col-sm-8">
+                            <!--div class="risk-select"-->
+                            <div>
+                            <%= control.collection_select(:procedure_ids, CppMeasure.for_name("Procedure"),  :id, :name,{},{class: 'multiselect',:multiple => "multiple"}) %>
+                            </div>
+                    </div>
+                   </div>
+                  </div>
+                      <%end%>
+                  </div>
+
+                 <!--Row first ------------>
+                <%= f.fields_for :mitigation do |mitigation| %>
+
+                <div>
+                 <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 ">
+                     <div class="form-group clearfix">
+                        <label for="inputEmail3" class="col-sm-4 control-label">Planning Strategy </label>
+                       <div class="col-sm-8">
+                        <div class="risk-select">
+                           <%= mitigation.collection_select(:planning_strategy_id, PlanningStrategy.all,  :id, :name) %>
+                               <%#= mitigation.select :planning_strategy_id,options_for_select(PlanningStrategy.all.collect{|x| [  x.name, x.id.to_i]}),{},{:class => 'multiselect' , :multiple => "multiple"}%>
+                      </div>
+                    </div>
+                   </div>
+                  </div>
+                  </div>
+
+                  <!--Row first ------------>
+                <div>
+                 <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 ">
+                     <div class="form-group clearfix">
+                        <label for="inputEmail3" class="col-sm-4 control-label">Mitigation Effort  </label>
+                       <div class="col-sm-8">
+                            <div class="risk-select">
+                             <%= mitigation.collection_select(:mitigation_effort_id, MitigationEffort.all, :id, :name) %>
+                            </div>
+                    </div>
+                   </div>
+                  </div>
+                  </div>
+                   </div>
+                    <div  class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                      <div>
+                           <div class="text-area clearfix">
+                              <label for="inputEmail3" class="col-sm-3 control-label"> <%= f.label :current_solution, t('risk.') %></label>
+                                     <div class="col-sm-9">
+                                     <%= mitigation.text_area :current_solution, :class=>"form-control risk-big-input", :value => "#{risk.mitigation.current_solution}" %>
+                                    <% if mitigation.object.errors[:current_solution].present? %>
+                                        <div class="error_message"><%= mitigation.object.errors[:current_solution][0]%></div>
+                                    <% end %>
+                                     </div>
+                                  </div>
+                              </div>
+
+
+                             <div>
+                           <div class="text-area clearfix">
+                              <label for="inputEmail3" class="col-sm-3 control-label">
+                                <%= f.label :requirements, t('risk.security_requirements') %></label>
+                                     <div class="col-sm-9">
+                                      <%= mitigation.text_area :security_requirements, :class=>"form-control risk-big-input" %>
+                                        <% if mitigation.object.errors[:security_requirements].present? %>
+                                    <div class="error_message"><%= mitigation.object.errors[:security_requirements][0]%></div>
+                                    <%end%>
+                                     </div>
+                                  </div>
+                                  </div>
+
+                             <div>
+                           <div class="text-area clearfix">
+                              <label for="inputEmail3" class="col-sm-3 control-label">
+                                <%= f.label :recommendations, t('risk.security_recommendations') %> </label>
+                                     <div class="col-sm-9">
+                                      <%= mitigation.text_area :security_recommendations, :class=>"form-control risk-big-input" %>
+                                      <% if mitigation.object.errors[:security_recommendations].present? %>
+                                        <div class="error_message"><%= mitigation.object.errors[:security_recommendations][0]%></div>
+                                      <%end%>
+                                     </div>
+                              </div>
+                           </div>
+                           <%end%>
+                      </div>
+                  </div>
+
+                </div>
+            </div>
+            </div>
+         </div>
+           </div>
+
+
+                <!---------------form 1 -------->
+         <div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="mit-plan-effort">
+              <div class="mitigation-percive">
+                <div class="mit-reccom-title-sp">Perceived Score</div>
+                  <div class="risk-wrap clearfix">
+                    <div class="sub-wrap-bg">
+                      <div  class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div>
+
+                          <div class="text-area clearfix">
+                            <label for="inputEmail3" class="col-sm-3 control-label">Threat</label>
+                            <div class="col-sm-9">
+                              <%= f.fields_for :control_measure do |control| %>
+                              <%= control.text_area :threat, row: 2, class: "form-control risk-big-input"%>
+                              <% if control.object.errors[:threat].present? %>
+                                <div class="error_message"><%= control.object.errors[:threat][0]%></div>
+                              <% end %>
+                            </div>
+                          </div>
+
+                            <div class="text-area clearfix">
+                              <label for="inputEmail3" class="col-sm-3 control-label">Effectiveness</label>
+                              <div class="col-sm-9">
+                                  <%= control.text_area :effectiveness, row: 2, class: "form-control risk-big-input"%>
+                                  <% if control.object.errors[:effectiveness].present? %>
+                                    <div class="error_message"><%= control.object.errors[:effectiveness][0]%></div>
+                                    <% end %>
+                                </div>
+                            </div>
+
+                        </div>
+                      </div>
+                      <div  class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div>
+                          <div class="text-area clearfix">
+                            <label for="inputEmail3" class="col-sm-3 control-label">Consequence</label>
+                            <div class="col-sm-9">
+                              <%= control.text_area :consequence, row: 2, class: "form-control risk-big-input"%>
+                            <% if control.object.errors[:consequence].present? %>
+                              <div class="error_message"><%= control.object.errors[:consequence][0]%></div>
+                            <% end %>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    <%end%>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <div class="container">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="method-padding">
+        <%@mitigation_page=true%>
+        <% if risk.risk_scoring_scoring_type == 'ClassicScoring'%>
+           <%= render "/risks/classic_scoring",f: f, risk: risk, mitigation_page: @mitigation_page %>
+        <% elsif risk.risk_scoring_scoring_type == 'DreadScoring' %>
+            <%=render "/risks/dread_scoring",f: f, risk: risk, mitigation_page: @mitigation_page%>
+        <% elsif risk.risk_scoring_scoring_type == 'CvssScoring' %>
+            <%=render "/risks/cvss_scoring",f: f, risk: risk, mitigation_page: @mitigation_page %>
+        <% elsif risk.risk_scoring_scoring_type == 'OwaspScoring' %>
+            <%=render "/risks/owasp_scoring",f: f, risk: risk, mitigation_page: @mitigation_page %>
+        <% elsif risk.risk_scoring_scoring_type == 'Custom' %>
+            <%=render "/risks/custom_scoring",f: f, risk: risk, mitigation_page: @mitigation_page %>
+        <% end %>
+      </div>
+    </div>
+        <div class="btn-group save-file">
+          <a class="black_btn" href="javascript:goBack()">Back</a>
+         <%= f.submit "Submit" , :class => "orange_btn" %>
+        </div>
+      </div>
+      </div>
+
+      </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+  $(document).ready(function() {
+        $('.multiselect').multiselect();
+   });
+</script>
+</div>

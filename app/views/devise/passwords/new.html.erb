@@ -1,0 +1,93 @@
+<div class="page-wrap">
+  <div class="header">
+    <div class="container">
+      <!-- Fixed navbar -->
+      <div class="navbar navbar-inverse " role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+            <% if request.subdomain.present? %>
+              <% company = Company.where(domain: request.subdomain).last %>
+                <% unless company.attachment.blank? %>
+                  <%= link_to image_tag(company.attachment.attachment_file, :class => "navbar-brand"), root_path %>
+                <% else %>
+                  <div class="company-name">
+                  <%= link_to company.name, root_path, :class=>"navbar-brand" %>
+                  </div>
+                <% end %>
+            <% else %>
+              <%= link_to image_tag("/assets/outer/footer_logo.png", :class => "navbar-brand"), root_path %>
+            <% end %>
+          </div>
+          <div class="login-wrap"> <%= link_to "Sign in", "/users/sign_in" %> <%= link_to "Sign up", "/companies/new" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="content">
+      <!-- Flash Notice Starts here -->
+      <%if flash[:forgot_notice]%>
+        <div class="alert alert-success"><button type='button' class='close' data-dismiss='alert'>&times;</button><%= flash[:forgot_notice] %></div>
+      <% end%>
+      <% if devise_error_messages!.present? %>
+        <div class="container">
+          <div class="col-md-4 col-md-offset-4">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <div id="error_explanation">
+                  <ul>
+                    <%= devise_error_messages! %>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <!-- Flash notice Ends Here -->
+
+      <div class="container">
+        <!-- Nav tabs -->
+          <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="login-box">
+              <div class="login-title">Forget your password?</div>
+              <div class="login-box-con">
+                <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { class: "form-horizontal", method: :post }) do |f| %>
+                  <div class="form-group form-group-lg">
+                    <label class="col-sm-4 control-label" for="formGroupInputLarge">Email :</label>
+                    <div class="col-sm-8">
+                      <%= f.email_field :email , :class =>"form-control" , :placeholder => "Enter your email" %>
+                    </div>
+                  </div>
+
+                  <div class="checkbox">
+
+                  </div>
+
+                  <div class = "logn-btn">
+                    <%= f.submit "Send me reset password instructions", :class => "btn btn-warning" %>
+                    <% end %>
+                  </div>
+
+                  <div class="forgot-pwd">
+                    <%= render "devise/shared/links" %>
+                  </div>
+
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="clearfix"></div>
+  <div class="footer footer-login">
+    <div class="container">
+      <div class="row">
+        <div class="footer_left col-lg-6">2014 © FixNix GRC Platform</div>
+        <div class="footer_right col-lg-6">Powered By <img src="/assets/outer/footer_logo.png" alt=""/></div>
+      </div>
+    </div>
+  </div>

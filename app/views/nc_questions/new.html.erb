@@ -1,0 +1,16 @@
+<%= javascript_include_tag "/assets/views/nc_questions.js" %>
+<div class="clearfix"></div>
+<div class="content">
+  <div class="container">
+    <div class="row">
+      <div class="tab_main_title">Checklist for Non - Compliance Audit</div>
+      <div class="audit-title">
+        <h2>Audit : <%= @audit.title %></h2>
+        <div class="audit-content container">
+          <%= render 'form',audit: @audit, library_questions: @library_questions %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

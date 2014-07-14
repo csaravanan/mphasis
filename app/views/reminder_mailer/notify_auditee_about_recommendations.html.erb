@@ -1,0 +1,66 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Minty-Multipurpose Responsive Email Template</title>
+
+   </head>
+<body style="background:#99c155; font-family:arial; margin:0; background-image:url(<%= HOST_URL %>/assets/outer/main_bg.jpg); background-repeat:repeat-x;">
+<table  style="margin:0 auto; width:625px;border-spacing: 0;">
+<tr>
+<td style="background-image:url(<%= HOST_URL %>/assets/outer/header_top.png); background-repeat:no-repeat; width:625px; height:59px; text-align:right; color:#82837a; font-size:12px; vertical-align: top; padding: 10px 50px; background-position: center top;">
+Having trouble viewing this email? <a style="color:#74ac37; text-decoration:none;" href="">View it in your browser</a>
+</td>
+</tr>
+</table>
+
+<table style="width:625px; margin:0 auto;">
+<tr>
+	<td style="color:#fff; font-size:20px; font-weight:bold; width:20%;"><%= @checklist_recommendation.checklist_type == "AuditCompliance" ? @checklist_recommendation.checklist.artifact_answers.last.responsibility.company.name : @checklist_recommendation.checklist.nc_question.auditee.company.name %></td>
+	<td style="width:21%;"></td>
+	<td style="background-image:url(<%= HOST_URL %>/assets/outer/header_right_bg.png)  ;background-repeat:no-repeat;font-size: 14px;padding: 10px 20px;text-align: right; width:13%; color:#64972f"> Note : <span>Notification</span></td>
+</tr>
+</table>
+
+
+<table style="background-image:url(<%= HOST_URL %>/assets/outer/content_top.png); background-repeat:no-repeat; text-align:center; width:625px; margin:0px auto">
+<tr><td>&nbsp;</td></tr>
+</table>
+
+<table style="margin:0 auto; width:625px;background-image:url(<%= HOST_URL %>/assets/outer/middle_content.png);background-repeat:repeat-y; "  cellpadding="0" cellspacing="0" border="0" >
+<tr><td style="color:#64972f; padding:10px 0 0 20px; font-size:20px;" >Audit Title:<%= @checklist_recommendation.checklist_type == "AuditCompliance" ? @checklist_recommendation.checklist.audit.title : @checklist_recommendation.checklist.nc_question.audit.title %></td>
+</tr>
+<tr><td style="color:#999999; padding:10px 0 0 20px; font-size:14px;" >Recommendation:<%= @checklist_recommendation.recommendation%></td></tr>
+<tr><td style="color:#999999; padding:10px 0 0 20px; font-size:14px;" >Reason:<%= @checklist_recommendation.reason%></td></tr>
+<tr><td style="color:#999999; padding:10px 0 0 20px; font-size:14px;" >Priority:<%= @checklist_recommendation.recommendation_priority_name%></td></tr>
+<tr><td style="color:#999999; padding:10px 0 0 20px; font-size:14px;" >Severity:<%= @checklist_recommendation.recommendation_severity_name%></td></tr>
+<tr><td style="color:#999999; padding:10px 0 0 20px; font-size:14px;" >Closure Date:<%= @checklist_recommendation.closure_date%></td></tr>
+
+<tr>
+	<td style="color:#999999; padding:10px 0 0 20px; font-size:14px;" ><% if @checklist_recommendation.checklist_type == 'AuditCompliance' %>Score:<%= @checklist_recommendation.checklist.score.level%><% end %>
+	</td>
+</tr>
+
+<tr><td style="color:#999999; padding:10px 0 0 20px; font-size:14px;" >Please try submit the documents before target date for avoiding escalations.</td></tr>
+</table>
+
+
+<table style="margin:0 auto; width:625px; padding: 20px 0;background-image:url(<%= HOST_URL %>/assets/outer/middle_content.png);background-repeat:repeat-y;"  cellpadding="0" cellspacing="0" border="0">
+<tr><td><a style="background:#74ac37; color:#fff; border-radius:5px; padding:10px 30px; border:1px solid #6c9c39; text-decoration:none; margin: 0 0 0 15px; font-size:12px;"  href="">View Audit Details</a></td></tr>
+</table>
+
+<table style="background-image:url(<%= HOST_URL %>/assets/outer/bottom_content.png); background-repeat:no-repeat;margin:0 auto; width:625px;">
+<tr><td>&nbsp;</td></tr>
+</table>
+
+
+<table style="margin:0px auto; width:625px;"  cellpadding="0" cellspacing="0" border="0">
+<tr><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td></tr>
+
+</table>
+
+
+</body>
+</html>

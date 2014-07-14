@@ -1,0 +1,64 @@
+<%= f.fields_for :risk_scoring, ((f.object.risk_scoring.present? && f.object.risk_scoring.scoring_type == "ClassicScoring") ? f.object.risk_scoring : RiskScoring.new) do |scoring| %>
+ <%if mitigation_page%>
+    <%= scoring.hidden_field :scoring_type%>
+ <%end%>
+  <%= scoring.fields_for :scoring,(scoring.object.scoring.present? ? scoring.object.scoring : ClassicScoring.new) do |classic_scoring| %>
+    <div class="row classic_scoring" style="<%= 'display:block' if risk_scoring_type_classic(risk) %>">
+      <div class="likelihood matrix-padding clearfix">
+        <div class="base-score-matrix">Classic Score Metrics
+          <div class="up-triangle"></div>
+        </div>
+        <div class="">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+              <div class="form-group">
+                <div class="col-sm-12">
+                    <%= classic_scoring.label :likelihood, t('classic.likelihood') %>
+                  <div class="risk-select">
+                    <%= classic_scoring.collection_select(:likelihood, ClassicScoringMetric.for_name("Likelihood"), :value, :name, {:class =>"form-control"})  %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+              <div class="form-group">
+                <div class="col-sm-12">
+                  <%= classic_scoring.label :impact, t('classic.impact') %>
+                  <div class="risk-select">
+                    <%= classic_scoring.collection_select(:impact, ClassicScoringMetric.for_name("Impact"), :value, :name, {:class =>"form-control"})  %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+              <div class="form-group">
+                <div class="col-sm-12">
+                  <%= classic_scoring.label :vulnerability, t('classic.vuln') %>
+                  <div class="risk-select">
+                    <%= classic_scoring.collection_select(:vulnerability, ClassicScoringMetric.for_name("Vulnerability"), :value, :name, {:class =>"form-control"})  %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+              <div class="form-group">
+                <div class="col-sm-12">
+                    <%= classic_scoring.label :velocity, t('classic.velocity') %>
+                  <div class="risk-select">
+                    <%= classic_scoring.collection_select(:velocity, ClassicScoringMetric.for_name("Velocity"), :value, :name, {:class =>"form-control"})  %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            </div>
+          </div>
+
+      </div>
+    </div>
+  <% end %>
+<% end %>
